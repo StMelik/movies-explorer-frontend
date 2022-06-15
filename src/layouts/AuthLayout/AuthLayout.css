@@ -1,0 +1,30 @@
+.auth {
+    max-width: 396px;
+    margin: 0 auto;
+    padding: 70px 15px;
+}
+
+.auth__logo {
+    margin-bottom: 40px;
+}
+
+.auth__title {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 40px;
+}
+
+.auth__question {
+    display: flex;
+    column-gap: 5px;
+    justify-content: center;
+    margin-top: 16px;
+}
+
+.auth__question-text {
+    color: #8b8b8b;
+}
+
+.auth__question-link {
+    color: #4285f4;
+}

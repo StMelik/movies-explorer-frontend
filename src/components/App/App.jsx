@@ -10,6 +10,7 @@ import Main from '../../pages/Main/Main'
 import NotFound from '../../pages/404/NotFound'
 import HeaderLayout from "../../layouts/HeaderLayout/HeaderLayout";
 import HeaderAndFooterLayout from "../../layouts/HeaderAndFooterLayout/HeaderAndFooterLayout";
+import AuthLayout from "../../layouts/AuthLayout/AuthLayout";
 
 function App() {
   return (
@@ -34,11 +35,15 @@ function App() {
         </Route>
 
         <Route path='/signin' exact>
-          <Login />
+          <AuthLayout>
+            <Login />
+          </AuthLayout>
         </Route>
 
         <Route path='/signup' exact>
-          <Register />
+          <AuthLayout>
+            <Register />
+          </AuthLayout>
         </Route>
 
         <Route path='/' exact>
