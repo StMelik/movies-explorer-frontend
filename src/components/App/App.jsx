@@ -12,7 +12,7 @@ import NotFound from '../../pages/404/NotFound'
 
 function App() {
   return (
-    <div className="App">
+    <div className="app">
       <Header />
       <Switch>
         <Route path='/movies' exact>
