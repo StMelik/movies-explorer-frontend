@@ -1,5 +1,13 @@
-.app {
-    max-width: 1470px;
+.container {
+    max-width: 1170px;
     margin: 0 auto;
     padding: 0 15px;
+}
+
+.title {
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: calc(1em * -0.04);
+    padding-bottom: 23px;
+    border-bottom: 1px solid #dadada;
 }
