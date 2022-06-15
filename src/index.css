@@ -27,6 +27,16 @@ a {
   transition: opacity 0.3s;
 }
 
-a:hover {
+button {
+  border: none;
+  color: inherit;
+  font: inherit;
+  background-color: transparent;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+a:hover,
+button:hover {
   opacity: 0.5;
 }
