@@ -1,0 +1,15 @@
+.movies {
+    padding-bottom: 80px;
+}
+
+.movies__more-button {
+    display: block;
+    margin: 0 auto;
+    background-color: #2f2f2f;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 20px 0;
+    max-width: 320px;
+    width: 100%;
+}

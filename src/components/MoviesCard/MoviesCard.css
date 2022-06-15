@@ -1,0 +1,47 @@
+.card-film {
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
+    overflow: hidden;
+    /* width: 364px; */
+    background-color: #222222;
+}
+
+.card-film__image {
+    background-image: url("../../images/film.jpg");
+    height: 203px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.card-film__description {
+    padding: 16px;
+}
+
+.card-film__row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-film__name {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.card-film__like-button {
+    width: 30px;
+    height: 30px;
+    background-image: url("../../images/icons/heart-icon.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.card-film__like-button_active {
+    background-image: url("../../images/icons/heart-active-icon.svg");
+}
+
+.card-film__duration {
+    font-size: 11px;
+    color: #8b8b8b;
+}
