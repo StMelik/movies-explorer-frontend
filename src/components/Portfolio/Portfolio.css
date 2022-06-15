@@ -1,0 +1,45 @@
+.portfolio {
+    padding-top: 100px;
+}
+
+.portfolio__title {
+    font-size: 18px;
+    line-height: 20px;
+    font-weight: 400;
+    color: #8b8b8b;
+    margin-bottom: 50px;
+}
+
+.portfolio__item:not(:last-child) {
+    border-bottom: 1px solid #424242;
+}
+
+.portfolio__link {
+    position: relative;
+    padding: 20px 0;
+    font-size: 30px;
+    line-height: 50px;
+    letter-spacing: calc(1em * -0.04);
+}
+
+.portfolio__item:first-child .portfolio__link {
+    padding-top: 0;
+}
+
+.portfolio__item:last-child .portfolio__link {
+    padding-bottom: 0;
+}
+
+.portfolio__link::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 7px;
+    transform: translateY(-50%);
+    width: 17px;
+    height: 17px;
+    background-image: url("../../images/icons/arrow-icon.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
