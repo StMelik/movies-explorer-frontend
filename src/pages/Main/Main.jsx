@@ -8,7 +8,6 @@ import Footer from '../../components/Footer/Footer'
 function Main() {
   return (
     <div className="main-page">
-      Main
       <NavTab />
       <AboutProject />
       <Techs />

@@ -1,0 +1,27 @@
+.header {
+    padding: 18px 0;
+}
+
+.header__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__buttons {
+    display: flex;
+    column-gap: 10px;
+}
+
+.header__button {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+    padding: 8px 20px;
+}
+
+.header__button_color_green {
+    color: #000000;
+    background-color: #3ddc84;
+    border-radius: 3px;
+}
