@@ -2,7 +2,6 @@
     box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
     border-radius: 6px;
     overflow: hidden;
-    /* width: 364px; */
     background-color: #222222;
 }
 
@@ -20,7 +19,10 @@
 
 .card-film__row {
     display: flex;
+    align-items: center;
     justify-content: space-between;
+    height: 30px;
+    margin-bottom: 10px;
 }
 
 .card-film__name {
@@ -44,4 +46,22 @@
 .card-film__duration {
     font-size: 11px;
     color: #8b8b8b;
+}
+
+.saved .card-film {
+    cursor: pointer;
+}
+
+.saved .card-film .card-film__like-button {
+    display: none;
+}
+
+.saved .card-film:hover .card-film__like-button {
+    display: block;
+    width: 30px;
+    height: 30px;
+    background-image: url("../../images/icons/delete-icon.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
