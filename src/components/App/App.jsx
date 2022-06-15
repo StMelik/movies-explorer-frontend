@@ -1,7 +1,6 @@
 import { Route, Switch } from "react-router-dom";
 
 import './App.css';
-import Header from '../Header/Header'
 import Movies from '../../pages/Movies/Movies'
 import Profile from '../../pages/Profile/Profile'
 import Register from '../../pages/Register/Register'
@@ -9,22 +8,29 @@ import Login from '../../pages/Login/Login'
 import SavedMovies from '../../pages/SavedMovies/SavedMovies'
 import Main from '../../pages/Main/Main'
 import NotFound from '../../pages/404/NotFound'
+import HeaderLayout from "../../layouts/HeaderLayout/HeaderLayout";
+import HeaderAndFooterLayout from "../../layouts/HeaderAndFooterLayout/HeaderAndFooterLayout";
 
 function App() {
   return (
-    <div className="app">
-      <Header />
+    <>
       <Switch>
         <Route path='/movies' exact>
-          <Movies />
+          <HeaderAndFooterLayout>
+            <Movies />
+          </HeaderAndFooterLayout>
         </Route>
 
         <Route path='/saved-movies' exact>
-          <SavedMovies />
+          <HeaderAndFooterLayout>
+            <SavedMovies />
+          </HeaderAndFooterLayout>
         </Route>
 
         <Route path='/profile' exact>
-          <Profile />
+          <HeaderLayout>
+            <Profile />
+          </HeaderLayout>
         </Route>
 
         <Route path='/signin' exact>
@@ -36,14 +42,16 @@ function App() {
         </Route>
 
         <Route path='/' exact>
-          <Main />
+          <HeaderAndFooterLayout>
+            <Main />
+          </HeaderAndFooterLayout>
         </Route>
 
         <Route path='*'>
           <NotFound />
         </Route>
       </Switch>
-    </div>
+    </>
   );
 }
 
