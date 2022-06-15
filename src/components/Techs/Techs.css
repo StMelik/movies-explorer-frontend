@@ -1,0 +1,40 @@
+.techs {
+    padding: 100px 0;
+    background-color: #272727;
+}
+
+.techs__title {
+    margin-bottom: 90px;
+}
+
+.techs__subtitle {
+    text-align: center;
+    font-size: 50px;
+    line-height: 58px;
+    margin-bottom: 26px;
+    letter-spacing: calc(1em * -0.04);
+}
+
+.techs__text {
+    text-align: center;
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 100px;
+}
+
+.techs__list {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.techs__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90px;
+    height: 60px;
+    letter-spacing: calc(1em * -0.04);
+    background-color: #303030;
+    border-radius: 10px;
+}
