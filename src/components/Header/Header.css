@@ -1,8 +1,8 @@
 .header {
-    position: absolute;
+    /* position: absolute;
     left: 0;
     top: 0;
-    right: 0;
+    right: 0; */
     padding: 18px 0;
 }
 
@@ -28,4 +28,26 @@
     color: #000000;
     background-color: #3ddc84;
     border-radius: 3px;
+}
+
+.header__profile {
+    display: flex;
+    align-items: center;
+    column-gap: 17px;
+}
+
+.header__profile-button {
+    line-height: 16px;
+    font-weight: 500;
+}
+
+.header__profile-photo {
+    width: 26px;
+    height: 30px;
+    border-radius: 4px;
+    background-color: #313131;
+    background-image: url("../../images/icons/profile-icon.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 12px 14px;
 }
