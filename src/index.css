@@ -40,3 +40,8 @@ a:hover,
 button:hover {
   opacity: 0.5;
 }
+
+img {
+  display: block;
+  width: 100%;
+}
