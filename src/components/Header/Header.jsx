@@ -2,6 +2,7 @@ import { useHistory, Link } from "react-router-dom";
 import './Header.css';
 import Logo from '../Logo/Logo'
 import Navigation from "../Navigation/Navigation";
+import ProfileButton from "../ProfileButton/ProfileButton";
 import { useState } from "react";
 
 function Header() {
@@ -10,10 +11,7 @@ function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   const buttons = isLoggedIn ? (
-    <div className="header__profile">
-      <Link className="header__profile-button" to='/profile'>Аккаунт</Link>
-      <div className="header__profile-photo"></div>
-    </div>
+    <ProfileButton />
   ) : (
     <div className="header__buttons">
       <Link className="header__button" to='/signup'>Регистрация</Link>

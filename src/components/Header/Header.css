@@ -30,28 +30,6 @@
     border-radius: 3px;
 }
 
-.header__profile {
-    display: flex;
-    align-items: center;
-    column-gap: 17px;
-}
-
-.header__profile-button {
-    line-height: 16px;
-    font-weight: 500;
-}
-
-.header__profile-photo {
-    width: 26px;
-    height: 30px;
-    border-radius: 4px;
-    background-color: #313131;
-    background-image: url("../../images/icons/profile-icon.svg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 12px 14px;
-}
-
 .header__menu-button {
     display: none;
     width: 28px;
@@ -68,10 +46,6 @@
     }
 
     .header__nav {
-        display: none;
-    }
-
-    .header__profile {
         display: none;
     }
 
