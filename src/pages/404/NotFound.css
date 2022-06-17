@@ -7,10 +7,14 @@
     padding-bottom: 60px;
 }
 
+.page-404__text {
+    text-align: center;
+    margin: auto 0;
+}
+
 .page-404__title {
     font-size: 140px;
     margin-bottom: 5px;
-    margin-top: auto;
 }
 
 .page-404__subtitle {
@@ -19,7 +23,6 @@
 
 .page-404__back-button {
     font: inherit;
-    margin-top: auto;
     border: none;
     background-color: transparent;
     color: #4285f4;
