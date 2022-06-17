@@ -3,7 +3,7 @@ import './Navigation.css';
 
 function Navigation() {
   return (
-    <nav className="nav">
+    <nav className="header__nav nav">
       <ul className="nav__list">
         <li><NavLink
           className="nav__link"

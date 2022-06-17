@@ -31,6 +31,7 @@ function Header() {
           <Logo />
           {isLoggedIn && <Navigation />}
           {buttons}
+          {isLoggedIn && <div className="header__menu-button"></div>}
         </div>
       </div>
 
@@ -38,7 +39,7 @@ function Header() {
       <div
         style={{
           position: 'absolute',
-          top: '10px',
+          top: '70px',
           right: '10px',
           cursor: 'pointer',
           padding: '5px',
