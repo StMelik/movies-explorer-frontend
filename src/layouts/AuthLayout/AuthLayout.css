@@ -1,8 +1,14 @@
-.auth {
-    max-width: 396px;
-    margin: 0 auto;
-    padding: 70px 15px;
-    height: 100vh;
+.auth__container {
+    max-width: 456px;
+    padding: 0 30px;
+}
+
+.auth__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 70px 0;
 }
 
 .auth__logo {
@@ -15,31 +21,35 @@
     margin-bottom: 40px;
 }
 
-.auth__question {
-    display: flex;
-    column-gap: 5px;
-    justify-content: center;
-    margin-top: 16px;
-}
-
-.auth__question-text {
-    color: #8b8b8b;
-}
-
-.auth__question-link {
-    color: #4285f4;
-}
-
 .form {
-    display: flex;
-    flex-direction: column;
-    height: calc(100% - 211px);
+    display: contents;
 }
 
-.form__submit-button {
-    margin-top: auto;
-    width: 100%;
-    background-color: #4285f4;
-    padding: 15px 0;
-    border-radius: 3px;
+@media screen and (max-width: 475px) {
+    .auth__wrapper {
+        justify-content: flex-start;
+    }
+
+    .auth__logo {
+        align-self: center;
+    }
+
+    .auth__title {
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .auth__wrapper {
+        padding-top: calc(56px + (70 - 56) * ((100vw - 320px) / (768 - 320)));
+        padding-bottom: calc(30px + (70 - 30) * ((100vw - 320px) / (768 - 320)));
+    }
+
+    .auth__logo {
+        margin-bottom: calc(50px + (40 - 50) * ((100vw - 320px) / (768 - 320)));
+    }
+
+    .auth__title {
+        margin-bottom: calc(80px + (40 - 80) * ((100vw - 320px) / (768 - 320)));
+    }
 }

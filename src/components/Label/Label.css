@@ -18,3 +18,9 @@
     color: #ffffff;
     background-color: #2f2f2f;
 }
+
+@media screen and (max-width: 475px) {
+    .label:last-of-type {
+        margin-bottom: auto;
+    }
+}

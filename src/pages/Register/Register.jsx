@@ -1,6 +1,7 @@
 import { useState } from "react";
 import './Register.css';
 import Label from "../../components/Label/Label";
+import AuthButton from "../../components/AuthButton/AuthButton";
 
 function Register() {
   const [name, setName] = useState('')
@@ -14,7 +15,7 @@ function Register() {
 
 
   return (
-    <form className="form" onSubmit={handleSubmitForm} name='register'>
+    <form className="form form-register" onSubmit={handleSubmitForm} name='register'>
       <Label
         text='Имя'
         value={name}
@@ -32,7 +33,7 @@ function Register() {
         value={password}
         setValue={setPassword}
       />
-      <button className='form__submit-button'>Зарегистрироваться</button>
+      <AuthButton />
     </form>
   );
 }

@@ -1,0 +1,31 @@
+.auth__question {
+    display: flex;
+    column-gap: 5px;
+    justify-content: center;
+    margin-top: 16px;
+}
+
+.auth__question-text {
+    color: #8b8b8b;
+}
+
+.auth__question-link {
+    color: #4285f4;
+}
+
+.form__submit-button {
+    width: 100%;
+    background-color: #4285f4;
+    padding: 15px 0;
+    border-radius: 3px;
+}
+
+@media screen and (max-width: 768px) {
+    .auth__question {
+        font-size: calc(12px + (14 - 12) * ((100vw - 320px) / (768 - 320)));
+    }
+
+    .form__submit-button {
+        font-size: calc(12px + (14 - 12) * ((100vw - 320px) / (768 - 320)));
+    }
+}
