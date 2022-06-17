@@ -8,9 +8,15 @@ function Footer() {
         <div className="footer__wrapper">
           <p className="footer__copyright">© 2022. Станислав Мелещик</p>
           <ul className="footer__links">
-            <li><a className="footer__link" href="https://practicum.yandex.ru/" target="_blank">Яндекс.Практикум</a></li>
-            <li><a className="footer__link" href="https://github.com/StMelik" target="_blank">Github</a></li>
-            <li><a className="footer__link" href="https://stmelik.ru/" target="_blank">Мой сайт</a></li>
+            <li>
+              <a className="footer__link" href="https://practicum.yandex.ru/" target="_blank">Яндекс.Практикум</a>
+            </li>
+            <li>
+              <a className="footer__link" href="https://github.com/StMelik" target="_blank">Github</a>
+            </li>
+            <li>
+              <a className="footer__link" href="https://stmelik.ru/" target="_blank">Мой сайт</a>
+            </li>
           </ul>
         </div>
       </div>
