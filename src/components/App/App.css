@@ -12,3 +12,10 @@
     padding-bottom: 23px;
     border-bottom: 1px solid #dadada;
 }
+
+@media screen and (max-width: 768px) {
+    .title {
+        font-size: calc(18px + (22 - 18) * ((100vw - 320px) / (768 - 320)));
+        padding-bottom: calc(28px + (23 - 28) * ((100vw - 320px) / (768 - 320)));
+    }
+}
