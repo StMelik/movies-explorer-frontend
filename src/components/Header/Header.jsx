@@ -42,10 +42,11 @@ function Header() {
           right: '10px',
           cursor: 'pointer',
           padding: '5px',
-          backgroundColor: 'green'
+          backgroundColor: 'green',
+          opacity: '0.2'
         }}
         onClick={() => setIsLoggedIn(!isLoggedIn)}
-      >Вход/Выход</div>
+      >Вход/<br />Выход</div>
     </header >
   );
 }
