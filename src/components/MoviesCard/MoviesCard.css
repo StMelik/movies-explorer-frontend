@@ -65,3 +65,23 @@
     background-position: center;
     background-size: cover;
 }
+
+@media screen and (max-width: 1140px) {
+    .card-film__image {
+        height: calc(190px + (203 - 190) * ((100vw - 768px) / (1140 - 768)));
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .card-film__image {
+        height: calc(168px + (190 - 168) * ((100vw - 768px) / (1140 - 768)));
+    }
+
+    .card-film__name {
+        font-size: calc(12px + (13 - 12) * ((100vw - 320px) / (768 - 320)));
+    }
+
+    .card-film__duration {
+        font-size: calc(10px + (11 - 10) * ((100vw - 320px) / (768 - 320)));
+    }
+}

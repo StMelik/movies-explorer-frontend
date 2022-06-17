@@ -14,7 +14,7 @@ function SavedMovies() {
 
   return (
     <div className="saved">
-      <div className="container">
+      <div className="container movies__container">
         <SearchForm
           isShort={isShort}
           searchQuery={searchQuery}

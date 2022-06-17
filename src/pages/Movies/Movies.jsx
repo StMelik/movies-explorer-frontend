@@ -14,7 +14,7 @@ function Movies() {
 
   return (
     <div className="movies">
-      <div className="container">
+      <div className="container movies__container">
         <SearchForm
           isShort={isShort}
           searchQuery={searchQuery}
