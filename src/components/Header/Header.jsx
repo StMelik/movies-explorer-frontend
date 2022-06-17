@@ -2,11 +2,12 @@ import { useHistory, Link } from "react-router-dom";
 import './Header.css';
 import Logo from '../Logo/Logo'
 import Navigation from "../Navigation/Navigation";
+import { useState } from "react";
 
 function Header() {
   const currentPath = useHistory().location.pathname
   const isMainPage = currentPath === '/'
-  const isLoggedIn = true
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   const buttons = isLoggedIn ? (
     <div className="header__profile">
@@ -32,6 +33,19 @@ function Header() {
           {buttons}
         </div>
       </div>
+
+      {/* Временно решение для демонстрации хедера */}
+      <div
+        style={{
+          position: 'absolute',
+          top: '10px',
+          right: '10px',
+          cursor: 'pointer',
+          padding: '5px',
+          backgroundColor: 'green'
+        }}
+        onClick={() => setIsLoggedIn(!isLoggedIn)}
+      >Вход/Выход</div>
     </header >
   );
 }
