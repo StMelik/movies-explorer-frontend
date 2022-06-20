@@ -66,15 +66,15 @@
     background-size: cover;
 }
 
-@media screen and (max-width: 1140px) {
+@media screen and (max-width: 1280px) {
     .card-film__image {
-        height: calc(190px + (203 - 190) * ((100vw - 768px) / (1140 - 768)));
+        height: calc(190px + (203 - 190) * ((100vw - 768px) / (1280 - 768)));
     }
 }
 
 @media screen and (max-width: 768px) {
     .card-film__image {
-        height: calc(168px + (190 - 168) * ((100vw - 768px) / (1140 - 768)));
+        height: calc(168px + (190 - 168) * ((100vw - 320px) / (768 - 320)));
     }
 
     .card-film__name {

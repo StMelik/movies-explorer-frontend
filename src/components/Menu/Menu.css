@@ -34,8 +34,8 @@
 }
 
 .menu__close-button {
-    width: 22px;
-    height: 22px;
+    width: 30px;
+    height: 30px;
     background-image: url("../../images/icons/close-button-icon.svg");
     background-repeat: no-repeat;
     background-position: center;
@@ -76,6 +76,17 @@
 
 @media screen and (max-width: 768px) {
     .menu__wrapper {
+        padding: 0 calc(14px + (22 - 14) * ((100vw - 320px) / (768 - 320)));
+        padding-top: calc(14px + (22 - 14) * ((100vw - 320px) / (768 - 320)));
         padding-bottom: calc(50px + (90 - 50) * ((100vw - 320px) / (768 - 320)));
+        row-gap: calc(97px + (105 - 97) * ((100vw - 320px) / (768 - 320)));
+    }
+
+    .menu__nav-list {
+        row-gap: calc(14px + (20 - 14) * ((100vw - 320px) / (768 - 320)));
+    }
+
+    .menu__nav-link {
+        padding: calc(5px + (4 - 5) * ((100vw - 320px) / (768 - 320))) 0;
     }
 }

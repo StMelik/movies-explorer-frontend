@@ -1,5 +1,6 @@
 .search {
     padding: 70px 0;
+    border-bottom: 1px solid #424242;
 }
 
 .from-search {
@@ -13,16 +14,6 @@
     border-radius: 9px;
     padding-left: 60px;
     padding-right: 30px;
-}
-
-.from-search::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -60px;
-    height: 1px;
-    background-color: #424242;
 }
 
 .from-search::before {
@@ -105,11 +96,14 @@
     transform: translateX(100%);
 }
 
-@media screen and (max-width: 768px) {
-    .page-404 {
-        padding-bottom: calc(30px + (220 - 30) * ((100vw - 320px) / (768 - 320)));
+@media screen and (max-width: 1280px) {
+    .search {
+        padding-top: calc(80px + (70 - 80) * ((100vw - 768px) / (1280 - 768)));
+        padding-bottom: calc(110px + (70 - 110) * ((100vw - 768px) / (1280 - 768)));
     }
+}
 
+@media screen and (max-width: 768px) {
     .from-search__input {
         font-size: calc(14px + (18 - 14) * ((100vw - 320px) / (768 - 320)));
     }
@@ -121,8 +115,7 @@
 
 @media screen and (max-width: 600px) {
     .search {
-        padding-top: 80px;
-        padding-bottom: 120px;
+        padding: 80px 0 110px;
     }
 
     .from-search {
@@ -132,10 +125,6 @@
 
     .from-search::before {
         content: none;
-    }
-
-    .from-search::after {
-        bottom: -110px;
     }
 
     .from-search__input {
