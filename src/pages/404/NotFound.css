@@ -30,9 +30,9 @@
     cursor: pointer;
 }
 
-@media screen and (max-width: 1140px) {
+@media screen and (max-width: 1280px) {
     .page-404 {
-        padding-bottom: calc(200px + (60 - 200) * ((100vw - 768px) / (1140 - 768)));
+        padding-bottom: calc(200px + (60 - 200) * ((100vw - 768px) / (1280 - 768)));
     }
 }
 

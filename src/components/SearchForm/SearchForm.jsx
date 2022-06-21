@@ -11,7 +11,7 @@ function SearchForm({ isShort, setIsShort, searchQuery, setSearchQuery, searchFi
           value={searchQuery}
           onInput={e => setSearchQuery(e.target.value)}
         />
-        <button className="from-search__button"></button>
+        <button className="from-search__button" type="button"></button>
         <label className="from-search__label" >
           <input
             className="from-search__checkbox"

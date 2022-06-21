@@ -47,13 +47,13 @@
     background-size: cover;
 }
 
-@media screen and (max-width: 1140px) {
+@media screen and (max-width: 1280px) {
     .portfolio {
-        padding-top: calc(90px + (100 - 90) * ((100vw - 768px) / (1140 - 768)));
+        padding-top: calc(90px + (100 - 90) * ((100vw - 768px) / (1280 - 768)));
     }
 
     .portfolio__link {
-        font-size: calc(28px + (30 - 28) * ((100vw - 768px) / (1140 - 768)));
+        font-size: calc(28px + (30 - 28) * ((100vw - 768px) / (1280 - 768)));
     }
 }
 

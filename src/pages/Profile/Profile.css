@@ -65,13 +65,13 @@
     font-weight: 500;
 }
 
-@media screen and (max-width: 1140px) {
+@media screen and (max-width: 1280px) {
     .profile__title {
-        margin-bottom: calc(95px + (120 - 95) * ((100vw - 768px) / (1140 - 768)));
+        margin-bottom: calc(95px + (120 - 95) * ((100vw - 768px) / (1280 - 768)));
     }
 
     .profile__form {
-        margin-bottom: calc(210px + (220 - 210) * ((100vw - 768px) / (1140 - 768)));
+        margin-bottom: calc(210px + (220 - 210) * ((100vw - 768px) / (1280 - 768)));
     }
 }
 

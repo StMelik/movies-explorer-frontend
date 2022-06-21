@@ -32,20 +32,6 @@ function Header() {
           {isLoggedIn && <div className="header__menu-button"></div>}
         </div>
       </div>
-
-      {/* Временно решение для демонстрации хедера */}
-      <div
-        style={{
-          position: 'absolute',
-          top: '70px',
-          right: '10px',
-          cursor: 'pointer',
-          padding: '5px',
-          backgroundColor: 'green',
-          opacity: '0.2'
-        }}
-        onClick={() => setIsLoggedIn(!isLoggedIn)}
-      >Вход/<br />Выход</div>
     </header >
   );
 }

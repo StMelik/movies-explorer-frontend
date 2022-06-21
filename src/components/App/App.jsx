@@ -72,20 +72,6 @@ function App() {
         isShowMenu={isShowMenu}
         setIsShowMenu={setIsShowMenu}
       />
-
-      {/* Временно решение для демонстрации меню */}
-      <div
-        style={{
-          position: 'absolute',
-          top: '120px',
-          right: '10px',
-          cursor: 'pointer',
-          padding: '5px',
-          backgroundColor: 'red',
-          opacity: '0.2'
-        }}
-        onClick={() => setIsShowMenu(!isShowMenu)}
-      >Меню</div>
     </>
   );
 }

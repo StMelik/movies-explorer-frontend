@@ -6,11 +6,7 @@
 }
 
 .card-film__image {
-    background-image: url("../../images/film.jpg");
     height: 203px;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
 }
 
 .card-film__description {

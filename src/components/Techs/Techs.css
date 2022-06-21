@@ -45,28 +45,28 @@
     border-radius: 10px;
 }
 
-@media screen and (max-width: 1140px) {
+@media screen and (max-width: 1280px) {
     .techs {
-        padding: calc(90px + (100 - 90) * ((100vw - 768px) / (1140 - 768))) 0;
+        padding: calc(90px + (100 - 90) * ((100vw - 768px) / (1280 - 768))) 0;
     }
 
     .techs__title {
-        margin-bottom: calc(80px + (90 - 80) * ((100vw - 768px) / (1140 - 768)));
+        margin-bottom: calc(80px + (90 - 80) * ((100vw - 768px) / (1280 - 768)));
     }
 
     .techs__text {
-        font-size: calc(12px + (14 - 12) * ((100vw - 768px) / (1140 - 768)));
-        line-height: calc(18px + (20 - 18) * ((100vw - 768px) / (1140 - 768)));
-        margin-bottom: calc(80px + (100 - 80) * ((100vw - 768px) / (1140 - 768)));
+        font-size: calc(12px + (14 - 12) * ((100vw - 768px) / (1280 - 768)));
+        line-height: calc(18px + (20 - 18) * ((100vw - 768px) / (1280 - 768)));
+        margin-bottom: calc(80px + (100 - 80) * ((100vw - 768px) / (1280 - 768)));
     }
 
     .techs__list {
-        grid-template-columns: repeat(auto-fit, calc(84px + (90 - 84) * ((100vw - 768px) / (1140 - 768))));
-        grid-auto-rows: calc(57px + (60 - 57) * ((100vw - 768px) / (1140 - 768)));
+        grid-template-columns: repeat(auto-fit, calc(84px + (90 - 84) * ((100vw - 768px) / (1280 - 768))));
+        grid-auto-rows: calc(57px + (60 - 57) * ((100vw - 768px) / (1280 - 768)));
     }
 
     .techs__item {
-        font-size: calc(12px + (14 - 12) * ((100vw - 768px) / (1140 - 768)));
+        font-size: calc(12px + (14 - 12) * ((100vw - 768px) / (1280 - 768)));
     }
 }
 
@@ -102,5 +102,11 @@
 
     .techs__item {
         font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .techs {
+        background-color: #202020;
     }
 }

@@ -17,7 +17,11 @@ function Login() {
         <p className="page-404__title">404</p>
         <p className="page-404__subtitle">Страница не найдена</p>
       </div>
-      <button className="page-404__back-button" onClick={handleClick}>Назад</button>
+      <button
+        className="page-404__back-button"
+        onClick={handleClick}
+        type="button"
+      >Назад</button>
     </div>
   );
 }
