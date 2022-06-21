@@ -1,0 +1,119 @@
+.project {
+    padding: 110px 0;
+}
+
+.project__container {
+    padding: 0 50px;
+}
+
+.project__title {
+    margin-bottom: 70px;
+}
+
+.project__description {
+    display: flex;
+    justify-content: space-between;
+    gap: 57px 40px;
+    margin-bottom: 110px;
+}
+
+.project__description-column {
+    max-width: 550px;
+}
+
+.project__description-title {
+    font-size: 20px;
+    letter-spacing: calc(1em * -0.04);
+    margin-bottom: 26px;
+}
+
+.project__description-text {
+    line-height: 20px;
+}
+
+.project__progress {
+    display: grid;
+    grid-template-columns: minmax(100px, 1fr) 4fr;
+}
+
+.project__progress-column {
+    text-align: center;
+}
+
+.project__progress-bar {
+    padding: 9px 0;
+    background-color: #303030;
+    min-height: 36px;
+    margin-bottom: 14px;
+}
+
+.project__progress-bar_color_green {
+    color: #000000;
+    background-color: #3ddc84;
+}
+
+.project__progress-title {
+    color: #8b8b8b;
+}
+
+@media screen and (max-width: 1280px) {
+    .project {
+        padding: calc(90px + (110 - 90) * ((100vw - 768px) / (1280 - 768))) 0;
+    }
+
+    .project__description {
+        column-gap: calc(30px + (40 - 30) * ((100vw - 768px) / (1280 - 768)));
+        margin-bottom: calc(90px + (110 - 90) * ((100vw - 768px) / (1280 - 768)));
+    }
+
+    .project__description-title {
+        margin-bottom: calc(22px + (26 - 22) * ((100vw - 768px) / (1280 - 768)));
+    }
+
+    .project__description-text {
+        font-size: calc(12px + (14 - 12) * ((100vw - 768px) / (1280 - 768)));
+        line-height: calc(18px + (20 - 18) * ((100vw - 768px) / (1280 - 768)));
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .project {
+        padding: calc(70px + (90 - 70) * ((100vw - 320px) / (768 - 320))) 0;
+    }
+
+    .project__container {
+        padding: 0 calc(18px + (50 - 18) * ((100vw - 320px) / (768 - 320)));
+    }
+
+    .project__title {
+        margin-bottom: calc(60px + (70 - 60) * ((100vw - 320px) / (768 - 320)));
+    }
+
+    .project__description {
+        margin-bottom: calc(60px + (90 - 60) * ((100vw - 320px) / (768 - 320)));
+    }
+
+    .project__description-title {
+        font-size: calc(18px + (20 - 18) * ((100vw - 320px) / (768 - 320)));
+        margin-bottom: calc(16px + (22 - 16) * ((100vw - 320px) / (768 - 320)));
+    }
+
+    .project__description-text {
+        font-size: calc(11px + (12 - 11) * ((100vw - 320px) / (768 - 320)));
+        line-height: calc(16px + (18 - 16) * ((100vw - 320px) / (768 - 320)));
+    }
+
+    .project__progress {
+        font-size: calc(11px + (14 - 11) * ((100vw - 320px) / (768 - 320)));
+    }
+
+    .project__progress-bar {
+        margin-bottom: calc(10px + (14 - 10) * ((100vw - 320px) / (768 - 320)));
+    }
+}
+
+@media screen and (max-width: 475px) {
+    .project__description {
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,27 @@
+.profile-button {
+    display: flex;
+    align-items: center;
+    column-gap: 17px;
+}
+
+.profile-button__link {
+    line-height: 16px;
+    font-weight: 500;
+}
+
+.profile-button__photo {
+    width: 26px;
+    height: 30px;
+    border-radius: 4px;
+    background-color: #313131;
+    background-image: url("../../images/icons/profile-icon.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 12px 14px;
+}
+
+@media screen and (max-width: 768px) {
+    .header .profile-button {
+        display: none;
+    }
+}

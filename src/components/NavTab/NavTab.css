@@ -1,0 +1,27 @@
+.project-nav {
+    padding: 24px;
+    background-color: #272727;
+}
+
+.project-nav__list {
+    display: flex;
+    column-gap: 40px;
+    justify-content: center;
+}
+
+.project-nav__link {
+    font-size: 13px;
+    line-height: 16px;
+    font-weight: 500;
+    border-bottom: 1px solid;
+}
+
+@media screen and (max-width: 768px) {
+    .project-nav__list {
+        column-gap: calc(24px + (40 - 24) * ((100vw - 320px) / (768 - 320)));
+    }
+
+    .project-nav__link {
+        font-size: calc(11px + (13 - 11) * ((100vw - 320px) / (768 - 320)));
+    }
+}

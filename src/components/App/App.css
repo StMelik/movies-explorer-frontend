@@ -1,0 +1,21 @@
+.container {
+    box-sizing: content-box;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.title {
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: calc(1em * -0.04);
+    padding-bottom: 23px;
+    border-bottom: 1px solid #dadada;
+}
+
+@media screen and (max-width: 768px) {
+    .title {
+        font-size: calc(18px + (22 - 18) * ((100vw - 320px) / (768 - 320)));
+        padding-bottom: calc(28px + (23 - 28) * ((100vw - 320px) / (768 - 320)));
+    }
+}

@@ -1,0 +1,112 @@
+.techs {
+    padding: 100px 0;
+    background-color: #272727;
+}
+
+.techs__container {
+    padding: 0 50px;
+}
+
+.techs__title {
+    margin-bottom: 90px;
+}
+
+.techs__subtitle {
+    text-align: center;
+    font-size: 50px;
+    line-height: 58px;
+    margin-bottom: 26px;
+    letter-spacing: calc(1em * -0.04);
+}
+
+.techs__text {
+    text-align: center;
+    font-size: 14px;
+    line-height: 20px;
+    margin: 0 auto 100px;
+    max-width: 460px;
+    letter-spacing: calc(1em * -0.04);
+}
+
+.techs__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 90px);
+    grid-auto-rows: 60px;
+    justify-content: center;
+    gap: 10px;
+}
+
+.techs__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: calc(1em * -0.04);
+    background-color: #303030;
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 1280px) {
+    .techs {
+        padding: calc(90px + (100 - 90) * ((100vw - 768px) / (1280 - 768))) 0;
+    }
+
+    .techs__title {
+        margin-bottom: calc(80px + (90 - 80) * ((100vw - 768px) / (1280 - 768)));
+    }
+
+    .techs__text {
+        font-size: calc(12px + (14 - 12) * ((100vw - 768px) / (1280 - 768)));
+        line-height: calc(18px + (20 - 18) * ((100vw - 768px) / (1280 - 768)));
+        margin-bottom: calc(80px + (100 - 80) * ((100vw - 768px) / (1280 - 768)));
+    }
+
+    .techs__list {
+        grid-template-columns: repeat(auto-fit, calc(84px + (90 - 84) * ((100vw - 768px) / (1280 - 768))));
+        grid-auto-rows: calc(57px + (60 - 57) * ((100vw - 768px) / (1280 - 768)));
+    }
+
+    .techs__item {
+        font-size: calc(12px + (14 - 12) * ((100vw - 768px) / (1280 - 768)));
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .techs {
+        padding: calc(70px + (90 - 70) * ((100vw - 320px) / (768 - 320))) 0;
+    }
+
+    .techs__container {
+        padding: 0 calc(18px + (50 - 18) * ((100vw - 320px) / (768 - 320)));
+    }
+
+    .techs__title {
+        margin-bottom: calc(60px + (80 - 60) * ((100vw - 320px) / (768 - 320)));
+    }
+
+    .techs__subtitle {
+        font-size: calc(30px + (50 - 30) * ((100vw - 320px) / (768 - 320)));
+        line-height: 1.21;
+    }
+
+    .techs__text {
+        font-size: calc(11px + (12 - 11) * ((100vw - 320px) / (768 - 320)));
+        line-height: calc(16px + (18 - 16) * ((100vw - 320px) / (768 - 320)));
+        margin-bottom: calc(50px + (80 - 50) * ((100vw - 320px) / (768 - 320)));
+    }
+
+    .techs__list {
+        padding: 0 calc(50px + (0 - 50) * ((100vw - 320px) / (768 - 320)));
+        grid-template-columns: repeat(auto-fit, 84px);
+        grid-auto-rows: 57px;
+    }
+
+    .techs__item {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .techs {
+        background-color: #202020;
+    }
+}

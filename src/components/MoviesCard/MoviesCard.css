@@ -1,0 +1,83 @@
+.card-film {
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
+    overflow: hidden;
+    background-color: #222222;
+}
+
+.card-film__image {
+    height: 203px;
+}
+
+.card-film__description {
+    padding: 16px;
+}
+
+.card-film__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 30px;
+    margin-bottom: 10px;
+}
+
+.card-film__name {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.card-film__like-button {
+    width: 30px;
+    height: 30px;
+    background-image: url("../../images/icons/heart-icon.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.card-film__like-button_active {
+    background-image: url("../../images/icons/heart-active-icon.svg");
+}
+
+.card-film__duration {
+    font-size: 11px;
+    color: #8b8b8b;
+}
+
+.saved .card-film {
+    cursor: pointer;
+}
+
+.saved .card-film .card-film__like-button {
+    display: none;
+}
+
+.saved .card-film:hover .card-film__like-button {
+    display: block;
+    width: 30px;
+    height: 30px;
+    background-image: url("../../images/icons/delete-icon.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+@media screen and (max-width: 1280px) {
+    .card-film__image {
+        height: calc(190px + (203 - 190) * ((100vw - 768px) / (1280 - 768)));
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .card-film__image {
+        height: calc(168px + (190 - 168) * ((100vw - 320px) / (768 - 320)));
+    }
+
+    .card-film__name {
+        font-size: calc(12px + (13 - 12) * ((100vw - 320px) / (768 - 320)));
+    }
+
+    .card-film__duration {
+        font-size: calc(10px + (11 - 10) * ((100vw - 320px) / (768 - 320)));
+    }
+}

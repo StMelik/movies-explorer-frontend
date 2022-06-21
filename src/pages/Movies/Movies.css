@@ -1,0 +1,29 @@
+.movies {
+    padding-bottom: 80px;
+}
+
+.movies__container {
+    padding: 0 30px;
+}
+
+.movies__more-button {
+    display: block;
+    margin: 0 auto;
+    background-color: #2f2f2f;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 11px 0;
+    max-width: 320px;
+    width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    .movies__container {
+        padding: 0 calc(10px + (30 - 10) * ((100vw - 320px) / (768 - 320)));
+    }
+
+    .movies__more-button {
+        max-width: calc(240px + (320 - 240) * ((100vw - 320px) / (768 - 320)));
+    }
+}
