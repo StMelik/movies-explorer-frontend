@@ -1,8 +1,9 @@
 import './Label.css';
 
-function Label({ text, value, setValue, type = 'text' }) {
+function Label({ text, name, type = 'text', onInput, isValid, value, pattern, title }) {
   const isPassword = type === 'password'
-  const getPlaceholder = (text) => {
+
+  function getPlaceholder(text) {
     const lowerText = text.toLowerCase()
     return text === 'Имя' ? `Вашe ${lowerText}` : `Ваш ${lowerText}`
   }
@@ -11,13 +12,20 @@ function Label({ text, value, setValue, type = 'text' }) {
     <label className="label">
       <p className="label__text">{text}</p>
       <input
-        className="label__input"
+        className={
+          isValid
+            ? 'label__input'
+            : 'label__input label__input_error'
+        }
         type={type}
-        value={value}
-        onChange={e => setValue(e.target.value)}
         autoComplete={isPassword ? 'off' : undefined}
         placeholder={getPlaceholder(text)}
         required
+        name={name}
+        onInput={onInput}
+        value={value}
+        pattern={pattern}
+        title={title}
       />
     </label>
   );

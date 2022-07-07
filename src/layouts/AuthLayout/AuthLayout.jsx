@@ -1,8 +1,8 @@
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+
 import './AuthLayout.css';
+
 import Logo from "../../components/Logo/Logo";
-
-
 
 function AuthLayout({ children }) {
     const currentPath = useHistory().location.pathname

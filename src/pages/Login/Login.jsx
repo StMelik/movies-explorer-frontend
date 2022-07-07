@@ -1,15 +1,17 @@
-import { useState } from "react";
 import './Login.css';
+
 import Label from "../../components/Label/Label";
 import AuthButton from "../../components/AuthButton/AuthButton";
+import ErrorText from "../../components/ErrorText/ErrorText";
 
-function Login() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+import { useFormWithValidation } from '../../hooks/useFormWithValidation'
+
+function Login({ handleLogin }) {
+  const { values, errors, isValid, handleChange, resetForm } = useFormWithValidation()
 
   function handleSubmitForm(evt) {
     evt.preventDefault()
-    console.log(email, password);
+    handleLogin(values)
   }
 
   return (
@@ -17,16 +19,25 @@ function Login() {
       <Label
         text='E-mail'
         type='email'
-        value={email}
-        setValue={setEmail}
+        name='email'
+        onInput={handleChange}
+        isValid={!errors.email}
+        value={values.email}
       />
+      {errors.email && <ErrorText type='auth'>{errors.email}</ErrorText>}
       <Label
         text='Пароль'
         type='password'
-        value={password}
-        setValue={setPassword}
+        name="password"
+        onInput={handleChange}
+        isValid={!errors.password}
+        value={values.password}
       />
-      <AuthButton />
+      {errors.password && <ErrorText type='auth'>{errors.password}</ErrorText>}
+      <AuthButton
+        isDisabled={!isValid}
+      />
+
     </form>
   );
 }

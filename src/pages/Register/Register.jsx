@@ -1,39 +1,54 @@
-import { useState } from "react";
+import { useFormWithValidation } from '../../hooks/useFormWithValidation'
+
 import './Register.css';
+
 import Label from "../../components/Label/Label";
 import AuthButton from "../../components/AuthButton/AuthButton";
+import ErrorText from "../../components/ErrorText/ErrorText";
 
-function Register() {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+function Register({ handleRegister }) {
+  const { values, errors, isValid, handleChange } = useFormWithValidation()
+
+  const patternName = '([A-Za-zа-яёА-ЯЁ]| |-)*'
 
   function handleSubmitForm(evt) {
     evt.preventDefault()
-    console.log(name, email, password);
+    handleRegister(values)
   }
 
-
   return (
-    <form className="form form-register" onSubmit={handleSubmitForm} name='register'>
+    <form className="form form-register" onSubmit={handleSubmitForm} name='register' noValidate>
       <Label
         text='Имя'
-        value={name}
-        setValue={setName}
+        name="name"
+        onInput={handleChange}
+        isValid={!errors.name}
+        value={values.name}
+        pattern={patternName}
+        title='Имя может состоять из букв, пробелов и -'
       />
+      {errors.name && <ErrorText type='auth'>{errors.name}</ErrorText>}
       <Label
         text='E-mail'
+        name="email"
         type='email'
-        value={email}
-        setValue={setEmail}
+        onInput={handleChange}
+        isValid={!errors.email}
+        value={values.email}
       />
+      {errors.email && <ErrorText type='auth'>{errors.email}</ErrorText>}
       <Label
         text='Пароль'
+        name="password"
         type='password'
-        value={password}
-        setValue={setPassword}
+        onInput={handleChange}
+        isValid={!errors.password}
+        value={values.password}
       />
-      <AuthButton />
+      {errors.password && <ErrorText type='auth'>{errors.password}</ErrorText>}
+      <AuthButton
+        isDisabled={!isValid}
+      />
     </form>
   );
 }

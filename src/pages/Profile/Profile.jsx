@@ -1,23 +1,59 @@
 import { useState } from "react";
+
 import './Profile.css';
 
-function Profile() {
-  const [name, setName] = useState('Виталий')
-  const [email, setEmail] = useState('pochta@yandex.ru')
+import Alert from "../../components/Alert/Alert";
+
+import { useFormWithValidation } from '../../hooks/useFormWithValidation'
+
+function Profile({ handleUpdateUser, currentUser, handleSignOut }) {
+  const [showAlert, setShowAlert] = useState(false)
+  const [messageAlert, setMessageAlert] = useState('')
+
+  const startValues = {
+    name: currentUser.name,
+    email: currentUser.email
+  }
+
+  const { values, isValid, handleChange, setIsValid } = useFormWithValidation(startValues)
+
+  function clickUpdateButton() {
+    handleUpdateUser(values)
+      .then(() => {
+        setMessageAlert('Данные профиля успешно обновлены!')
+        setIsValid(false)
+      })
+      .catch(() => {
+        setMessageAlert('Не удалось обновить данные профиля!')
+      })
+      .finally(() => {
+        setShowAlert(true)
+        setTimeout(() => {
+          setShowAlert(false)
+        }, 3000)
+      })
+  }
+
+  function clickSignOutButton() {
+    handleSignOut()
+  }
 
   return (
     <div className="profile">
       <div className="container profile__container">
         <div className="profile__wrapper">
-          <h1 className="profile__title">Привет, Виталий!</h1>
+          <h1 className="profile__title">{`Привет, ${currentUser.name}!`}</h1>
           <form className="profile__form">
             <label className='profile__label'>
               <p className="profile__text">Имя</p>
               <input
                 className="profile__input"
                 type="text"
-                value={name}
-                onChange={e => setName(e.target.value)}
+                value={values.name}
+                name="name"
+                onInput={handleChange}
+                required
+                placeholder="Ваше имя"
               />
             </label>
             <label className='profile__label'>
@@ -25,17 +61,37 @@ function Profile() {
               <input
                 className="profile__input"
                 type="email"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
+                value={values.email}
+                name="email"
+                onInput={handleChange}
+                required
+                placeholder="Ваш E-mail"
               />
             </label>
           </form>
           <div className="profile__buttons">
-            <button className='profile__button' type="button">Редактировать</button>
-            <button className='profile__button profile__button_color_pink' type="button">Выйти из аккаунта</button>
+            <button
+              className={
+                isValid
+                  ? 'profile__button'
+                  : 'profile__button profile__button_disabled'
+              }
+              type="button"
+              onClick={clickUpdateButton}
+              disabled={!isValid}
+            >Редактировать</button>
+            <button
+              className='profile__button profile__button_color_pink'
+              type="button"
+              onClick={clickSignOutButton}
+            >Выйти из аккаунта</button>
           </div>
         </div>
       </div>
+      <Alert
+        showAlert={showAlert}
+        messageAlert={messageAlert}
+      />
     </div>
   );
 }

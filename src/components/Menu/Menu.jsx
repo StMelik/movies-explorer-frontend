@@ -1,5 +1,7 @@
 import { NavLink } from 'react-router-dom';
+
 import './Menu.css';
+
 import ProfileButton from '../ProfileButton/ProfileButton';
 
 function Menu({ isShowMenu, setIsShowMenu }) {
