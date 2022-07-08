@@ -10,9 +10,6 @@ import Login from '../../pages/Login/Login'
 import SavedMovies from '../../pages/SavedMovies/SavedMovies'
 import Main from '../../pages/Main/Main'
 import NotFound from '../../pages/404/NotFound'
-import HeaderLayout from "../../layouts/HeaderLayout/HeaderLayout";
-import HeaderAndFooterLayout from "../../layouts/HeaderAndFooterLayout/HeaderAndFooterLayout";
-import AuthLayout from "../../layouts/AuthLayout/AuthLayout";
 import Menu from "../Menu/Menu";
 
 import ProtectedRoute from "../../hocs/ProtectedRoute";
@@ -35,6 +32,8 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   // Состояние ответа сервера
   const [isFetchError, setIsFetchError] = useState(false)
+
+  const [isPreloader, setIsPreloader] = useState(true)
 
   const history = useHistory()
   const location = useLocation()
@@ -85,8 +84,10 @@ function App() {
       .then(res => {
         const token = res.token
         setToken(token)
+        setIsLoggedIn(true)
         jwtLocal.save(token)
         getUserInfo(token)
+        history.push('/movies')
       })
       .catch(() => {
         setIsFetchError(true)
@@ -100,9 +101,11 @@ function App() {
   function getUserInfo(token) {
     mainApi.getUserInfo(token)
       .then(user => {
-        setIsLoggedIn(true)
+        if (!isLoggedIn) setIsLoggedIn(true)
         setCurrentUser(user)
-        history.push('/movies')
+      })
+      .finally(() => {
+        setIsPreloader(false)
       })
   }
 
@@ -129,6 +132,8 @@ function App() {
     if (token) {
       setToken(token)
       getUserInfo(token)
+    } else {
+      setIsPreloader(false)
     }
   }
 
@@ -148,75 +153,51 @@ function App() {
     <>
       <AppStateContext.Provider value={{ loaderButton, isLoggedIn, currentUser, isFetchError }}>
         <Switch>
-          <Route path='/movies' exact>
-            <ProtectedRoute
-              isLoggedIn={isLoggedIn}
-            >
-              <HeaderAndFooterLayout
-                setIsShowMenu={setIsShowMenu}
-              >
-                <Movies
-                  getAllFilms={getAllFilms}
-                  handleClickLikeButton={handleClickLikeButton}
-                  getLikeFilms={getLikeFilms}
-                />
-              </HeaderAndFooterLayout>
-            </ProtectedRoute>
-          </Route>
+          <ProtectedRoute
+            path='/movies'
+            exact
+            isLoggedIn={isLoggedIn}
+            getAllFilms={getAllFilms}
+            handleClickLikeButton={handleClickLikeButton}
+            getLikeFilms={getLikeFilms}
+            setIsShowMenu={setIsShowMenu}
+            component={Movies}
+            isPreloader={isPreloader}
+          />
 
-          <Route path='/saved-movies' exact>
-            <ProtectedRoute
-              isLoggedIn={isLoggedIn}
-            >
-              <HeaderAndFooterLayout
-                setIsShowMenu={setIsShowMenu}
-              >
-                <SavedMovies
-                  handleClickLikeButton={handleClickLikeButton}
-                  getLikeFilms={getLikeFilms}
-                />
-              </HeaderAndFooterLayout>
-            </ProtectedRoute>
-          </Route>
+          <ProtectedRoute
+            path='/saved-movies'
+            exact
+            isLoggedIn={isLoggedIn}
+            handleClickLikeButton={handleClickLikeButton}
+            getLikeFilms={getLikeFilms}
+            setIsShowMenu={setIsShowMenu}
+            component={SavedMovies}
+            isPreloader={isPreloader}
+          />
 
-          <Route path='/profile' exact>
-            <ProtectedRoute
-              isLoggedIn={isLoggedIn}
-            >
-              <HeaderLayout
-                setIsShowMenu={setIsShowMenu}
-              >
-                <Profile
-                  handleUpdateUser={handleUpdateUser}
-                  handleSignOut={handleSignOut}
-                  currentUser={currentUser}
-                />
-              </HeaderLayout>
-            </ProtectedRoute>
-          </Route>
+          <ProtectedRoute
+            path='/profile'
+            exact
+            isLoggedIn={isLoggedIn}
+            handleUpdateUser={handleUpdateUser}
+            handleSignOut={handleSignOut}
+            currentUser={currentUser}
+            setIsShowMenu={setIsShowMenu}
+            component={Profile}
+            isPreloader={isPreloader}
+          />
 
           <Route path='/signin' exact>
-            <AuthLayout>
-              <Login
-                handleLogin={handleLogin}
-              />
-            </AuthLayout>
+            <Login handleLogin={handleLogin} />
           </Route>
 
           <Route path='/signup' exact>
-            <AuthLayout>
-              <Register
-                handleRegister={handleRegister}
-              />
-            </AuthLayout>
+            <Register handleRegister={handleRegister} />
           </Route>
 
           <Route path='/' exact>
-            <HeaderAndFooterLayout
-              setIsShowMenu={setIsShowMenu}
-            >
-              <Main />
-            </HeaderAndFooterLayout>
+            <Main setIsShowMenu={setIsShowMenu} />
           </Route>
 
           <Route path='*'>

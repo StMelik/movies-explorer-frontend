@@ -4,10 +4,11 @@ import './SavedMovies.css';
 
 import SearchForm from '../../components/SearchForm/SearchForm';
 import MoviesCardList from '../../components/MoviesCardList/MoviesCardList';
+import HeaderAndFooterLayout from '../../layouts/HeaderAndFooterLayout/HeaderAndFooterLayout';
 
 import { filterFilms } from '../../utils/filterFilms'
 
-function SavedMovies({ getLikeFilms, handleClickLikeButton }) {
+function SavedMovies({ getLikeFilms, handleClickLikeButton, setIsShowMenu }) {
   const [films, setFilms] = useState([])
   const [viewFilms, setViewFilms] = useState([])
   const [isLoading, setIsLoading] = useState(false)
@@ -19,18 +20,18 @@ function SavedMovies({ getLikeFilms, handleClickLikeButton }) {
 
   useEffect(() => {
     hideNotFoundMessage()
-    if (!films.length) {
-      showNotFoundMessage()
-    }
+    if (!films.length) showNotFoundMessage()
   }, [films])
+
+  function setAllFilms(films) {
+    setFilms(films)
+    setViewFilms(films)
+  }
 
   function getFilms() {
     setIsLoading(true)
     getLikeFilms()
-      .then(films => {
-        setFilms(films)
-        setViewFilms(films)
-      })
+      .then(setAllFilms)
       .catch(() => {
         setMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз')
       })
@@ -43,17 +44,12 @@ function SavedMovies({ getLikeFilms, handleClickLikeButton }) {
     const filterFilmsList = filterFilms(films, values)
     hideNotFoundMessage()
     setViewFilms(filterFilmsList)
-    if (!filterFilmsList.length) {
-      showNotFoundMessage()
-    }
+    if (!filterFilmsList.length) showNotFoundMessage()
   }
 
   function deleteFilm(filmId) {
     handleClickLikeButton(filmId)
-      .then(() => {
-        setFilms(films.filter(film => film._id !== filmId))
-        setViewFilms(films.filter(film => film._id !== filmId))
-      })
+      .then(() => setAllFilms(films.filter(film => film._id !== filmId)))
   }
 
   function showNotFoundMessage() {
@@ -66,20 +62,24 @@ function SavedMovies({ getLikeFilms, handleClickLikeButton }) {
   }
 
   return (
-    <div className="saved">
-      <div className="container movies__container">
-        <SearchForm
-          searchFilms={searchFilms}
-          type="saved-movies"
-        />
-        <MoviesCardList
-          films={viewFilms}
-          isLoading={isLoading}
-          message={message}
-          handleClickLikeButton={deleteFilm}
-        />
+    <HeaderAndFooterLayout
+      setIsShowMenu={setIsShowMenu}
+    >
+      <div className="saved">
+        <div className="container movies__container">
+          <SearchForm
+            searchFilms={searchFilms}
+            type="saved-movies"
+          />
+          <MoviesCardList
+            films={viewFilms}
+            isLoading={isLoading}
+            message={message}
+            handleClickLikeButton={deleteFilm}
+          />
+        </div>
       </div>
-    </div>
+    </HeaderAndFooterLayout>
   );
 }
 

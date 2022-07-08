@@ -4,12 +4,13 @@ import './Movies.css';
 
 import SearchForm from '../../components/SearchForm/SearchForm';
 import MoviesCardList from '../../components/MoviesCardList/MoviesCardList';
+import HeaderAndFooterLayout from '../../layouts/HeaderAndFooterLayout/HeaderAndFooterLayout';
 
 import LoacalStorage from '../../utils/LocalStorage';
 import { filterFilms } from '../../utils/filterFilms'
 import { useCardCount } from '../../hooks/useCardCount'
 
-function Movies({ getAllFilms, getLikeFilms, handleClickLikeButton }) {
+function Movies({ getAllFilms, getLikeFilms, handleClickLikeButton, setIsShowMenu }) {
   // Отфильтрованные фильмы
   const [films, setFilms] = useState([])
   // Отображаемые фильмы
@@ -77,8 +78,8 @@ function Movies({ getAllFilms, getLikeFilms, handleClickLikeButton }) {
     getLikeFilms()
       .then(savedFilms => {
         const likedFilms = savedFilms.map(film => ({
-          filmId: film.movieId,
-          likeId: film._id
+          movieId: film.movieId,
+          _id: film._id
         }))
 
         const filmsWithLike = films.map(film => {
@@ -86,40 +87,42 @@ function Movies({ getAllFilms, getLikeFilms, handleClickLikeButton }) {
           let _id = ''
 
           likedFilms.forEach(likedFilm => {
-            isLikedFilm = film.id === likedFilm.filmId
-            if (isLikedFilm) _id = likedFilm.likeId
+            isLikedFilm = film.id === likedFilm.movieId
+            if (isLikedFilm) _id = likedFilm._id
           })
 
           return { ...film, _id }
         })
 
         setFilms(filmsWithLike)
-
-        // console.log('filmsWithLike', filmsWithLike);
       })
   }
 
   return (
-    <div className="movies">
-      <div className="container movies__container">
-        <SearchForm
-          searchFilms={searchFilms}
-          type='movies'
-        />
-        <MoviesCardList
-          films={viewFilms}
-          isLoading={isLoading}
-          message={message}
-          handleClickLikeButton={handleClickLikeButton}
-        />
-        {films.length > 3 && films.length !== viewFilms.length && <button
-          className="movies__more-button"
-          type='button'
-          onClick={() => showMoreFilms()}
-        >Ещё</button>}
+    <HeaderAndFooterLayout
+      setIsShowMenu={setIsShowMenu}
+    >
+      <div className="movies">
+        <div className="container movies__container">
+          <SearchForm
+            searchFilms={searchFilms}
+            type='movies'
+          />
+          <MoviesCardList
+            films={viewFilms}
+            isLoading={isLoading}
+            message={message}
+            handleClickLikeButton={handleClickLikeButton}
+          />
+          {films.length > 3 && films.length !== viewFilms.length && <button
+            className="movies__more-button"
+            type='button'
+            onClick={() => showMoreFilms()}
+          >Ещё</button>}
 
-      </div>
-    </div >
+        </div>
+      </div >
+    </HeaderAndFooterLayout>
   );
 }
 

@@ -1,10 +1,16 @@
-import { Redirect } from "react-router-dom";
+import { Redirect, Route } from "react-router-dom";
 
-function ProtectedRoute({ isLoggedIn, children }) {
+import Preloader from "../components/Preloader/Preloader";
+
+function ProtectedRoute({ isLoggedIn, isPreloader, component: Component, ...props }) {
     return (
-        <>
-            {isLoggedIn ? children : <Redirect to='/' />}
-        </>
+        <Route>
+            {isPreloader
+                ? <Preloader />
+                : isLoggedIn
+                    ? <Component {...props} />
+                    : <Redirect to='/' />}
+        </Route>
     )
 }
 

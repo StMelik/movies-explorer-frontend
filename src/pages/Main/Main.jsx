@@ -5,16 +5,19 @@ import NavTab from '../../components/NavTab/NavTab'
 import AboutProject from '../../components/AboutProject/AboutProject'
 import Techs from '../../components/Techs/Techs'
 import AboutMe from '../../components/AboutMe/AboutMe'
+import HeaderAndFooterLayout from '../../layouts/HeaderAndFooterLayout/HeaderAndFooterLayout';
 
-function Main() {
+function Main({ setIsShowMenu }) {
   return (
-    <>
+    <HeaderAndFooterLayout
+      setIsShowMenu={setIsShowMenu}
+    >
       <Promo />
       <NavTab />
       <AboutProject />
       <Techs />
       <AboutMe />
-    </>
+    </HeaderAndFooterLayout>
   );
 }
 
