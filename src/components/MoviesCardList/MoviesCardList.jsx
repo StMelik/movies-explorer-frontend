@@ -11,7 +11,7 @@ function MoviesCardList({ films, isLoading, message, handleClickLikeButton }) {
         : <ul className="movies-list">
           {isLoading
             ? <Preloader />
-            : films.map(film => {
+            : films?.map(film => {
               return <MoviesCard
                 film={film}
                 key={film.id || film.movieId}

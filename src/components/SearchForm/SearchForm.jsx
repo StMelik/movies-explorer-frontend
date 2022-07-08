@@ -24,13 +24,19 @@ function SearchForm({ searchFilms, type }) {
     if (searchQuery) setIsValid(true)
   }, [])
 
-  function saveValuesLocal() {
-    searchQueryLocal.save(values)
+
+  // Поиск фильмов при изменении состояния чекбокса
+  function onChangeCheckbox(evt) {
+    const newValues = { ...values, short: evt.target.checked }
+
+    handleChange(evt)
+    searchFilms(newValues)
+    searchQueryLocal.save(newValues)
   }
 
-  const handleSubmitForm = (evt) => {
+  function handleSubmitForm(evt) {
     evt.preventDefault()
-    saveValuesLocal()
+    searchQueryLocal.save(values)
 
     if (!isValid) {
       setIsSearchError(true)
@@ -59,7 +65,7 @@ function SearchForm({ searchFilms, type }) {
             type="checkbox"
             name='short'
             checked={values.short}
-            onChange={handleChange}
+            onChange={onChangeCheckbox}
           />
           <div className="from-search__custom-checkbox">
             <div className="from-search__custom-mark"></div>

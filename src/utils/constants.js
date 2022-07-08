@@ -8,4 +8,9 @@ const PATTERNS = {
     NAME: '([A-Za-zа-яёА-ЯЁ]| |-)*'
 }
 
-export { INPUTS, PATTERNS }
+const MESSAGES = {
+    NOT_FOUND: 'Ничего не найдено',
+    ERROR: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз'
+}
+
+export { INPUTS, PATTERNS, MESSAGES }

@@ -35,6 +35,8 @@ function App() {
 
   const [isPreloader, setIsPreloader] = useState(true)
 
+  // const [allFilms, setAllFilms] = useState([])
+
   const history = useHistory()
   const location = useLocation()
 

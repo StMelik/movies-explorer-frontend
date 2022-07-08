@@ -8,17 +8,22 @@ import HeaderAndFooterLayout from '../../layouts/HeaderAndFooterLayout/HeaderAnd
 
 import LoacalStorage from '../../utils/LocalStorage';
 import { filterFilms } from '../../utils/filterFilms'
+import { formatLikedFilms, setLike } from '../../utils/likes'
+import { MESSAGES } from '../../utils/constants'
 import { useCardCount } from '../../hooks/useCardCount'
 
 function Movies({ getAllFilms, getLikeFilms, handleClickLikeButton, setIsShowMenu }) {
+  const [allFilms, setAllFilms] = useState(null)
+  const [values, setValues] = useState(null)
+
   // Отфильтрованные фильмы
-  const [films, setFilms] = useState([])
+  const [films, setFilms] = useState(null)
   // Отображаемые фильмы
-  const [viewFilms, setViewFilms] = useState([])
+  const [viewFilms, setViewFilms] = useState(null)
   // Сотояние прелодера
   const [isLoading, setIsLoading] = useState(false)
   // Сообщение об ошибке или что фильмы не найдены
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState(null)
 
   const { countFilms, startCountFilms, setParamsCountFilms } = useCardCount(3, 12)
 
@@ -27,17 +32,56 @@ function Movies({ getAllFilms, getLikeFilms, handleClickLikeButton, setIsShowMen
 
   // Установить количество загружаемых фильмов
   useEffect(() => {
-    setFilmsWhitLike(filmsLocal.load())
+    setFilms(filmsLocal.load())
+
     setParamsCountFilms('all')
     window.addEventListener('resize', setParamsCountFilms)
-
     return () => {
       window.removeEventListener('resize', setParamsCountFilms)
     }
   }, [])
 
+  // Получить все фильмы и лайкнутые фильмы
   useEffect(() => {
-    setViewFilms([...films.slice(0, startCountFilms)])
+    const isNotAllFilms = !allFilms?.all.length
+
+    if (isNotAllFilms && isLoading) {
+      Promise.all([getAllFilms(), getLikeFilms()])
+        .then(([all, likes]) => {
+          setAllFilms({
+            all,
+            likes: formatLikedFilms(likes)
+          })
+        })
+        .catch(() => {
+          setMessage(MESSAGES.ERROR)
+        })
+        .finally(() => {
+          setIsLoading(false)
+        })
+    }
+  }, [values])
+
+  // Получить отфильтрованные фильмы
+  useEffect(() => {
+    if (values && allFilms) {
+      const filtredFilms = filterFilms(allFilms.all, values)
+      const isNotFiltredFilms = !filtredFilms.length
+      if (isNotFiltredFilms) setMessage(MESSAGES.NOT_FOUND)
+
+      const filmsWithLike = setLike(filtredFilms, allFilms.likes)
+      filmsLocal.save(filmsWithLike)
+      setFilms(filmsWithLike)
+    }
+  }, [allFilms, values])
+
+
+  useEffect(() => {
+    if (films) {
+      setViewFilms([...films.slice(0, startCountFilms)])
+      setMessage('')
+    }
+    if (!films?.length) setMessage(MESSAGES.NOT_FOUND)
   }, [films, startCountFilms])
 
   // Показать еще фильмы
@@ -50,52 +94,8 @@ function Movies({ getAllFilms, getLikeFilms, handleClickLikeButton, setIsShowMen
 
   // Поиск фильмов
   function searchFilms(values) {
-    setIsLoading(true)
-    setMessage('')
-
-    getAllFilms()
-      .then(allFilms => {
-        const filterFilmsList = filterFilms(allFilms, values)
-
-        if (!filterFilmsList.length) {
-          setMessage('Ничего не найдено')
-          setViewFilms([])
-        }
-
-        setFilmsWhitLike(filterFilmsList)
-        filmsLocal.save(filterFilmsList)
-      })
-      .catch(() => {
-        setMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз')
-      })
-      .finally(() => {
-        setIsLoading(false)
-      })
-  }
-
-  // Установить лайки на лайкнутые фильмы
-  function setFilmsWhitLike(films) {
-    getLikeFilms()
-      .then(savedFilms => {
-        const likedFilms = savedFilms.map(film => ({
-          movieId: film.movieId,
-          _id: film._id
-        }))
-
-        const filmsWithLike = films.map(film => {
-          let isLikedFilm = false
-          let _id = ''
-
-          likedFilms.forEach(likedFilm => {
-            isLikedFilm = film.id === likedFilm.movieId
-            if (isLikedFilm) _id = likedFilm._id
-          })
-
-          return { ...film, _id }
-        })
-
-        setFilms(filmsWithLike)
-      })
+    setValues(values)
+    if (!allFilms) setIsLoading(true)
   }
 
   return (
@@ -114,12 +114,11 @@ function Movies({ getAllFilms, getLikeFilms, handleClickLikeButton, setIsShowMen
             message={message}
             handleClickLikeButton={handleClickLikeButton}
           />
-          {films.length > 3 && films.length !== viewFilms.length && <button
+          {films && films?.length > 3 && films?.length !== viewFilms?.length && <button
             className="movies__more-button"
             type='button'
             onClick={() => showMoreFilms()}
           >Ещё</button>}
-
         </div>
       </div >
     </HeaderAndFooterLayout>

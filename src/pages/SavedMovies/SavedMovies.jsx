@@ -7,6 +7,7 @@ import MoviesCardList from '../../components/MoviesCardList/MoviesCardList';
 import HeaderAndFooterLayout from '../../layouts/HeaderAndFooterLayout/HeaderAndFooterLayout';
 
 import { filterFilms } from '../../utils/filterFilms'
+import { MESSAGES } from '../../utils/constants'
 
 function SavedMovies({ getLikeFilms, handleClickLikeButton, setIsShowMenu }) {
   const [films, setFilms] = useState([])
@@ -19,7 +20,7 @@ function SavedMovies({ getLikeFilms, handleClickLikeButton, setIsShowMenu }) {
   }, [])
 
   useEffect(() => {
-    hideNotFoundMessage()
+    setMessage('')
     if (!films.length) showNotFoundMessage()
   }, [films])
 
@@ -33,7 +34,7 @@ function SavedMovies({ getLikeFilms, handleClickLikeButton, setIsShowMenu }) {
     getLikeFilms()
       .then(setAllFilms)
       .catch(() => {
-        setMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз')
+        setMessage(MESSAGES.ERROR)
       })
       .finally(() => {
         setIsLoading(false)
@@ -42,7 +43,7 @@ function SavedMovies({ getLikeFilms, handleClickLikeButton, setIsShowMenu }) {
 
   function searchFilms(values) {
     const filterFilmsList = filterFilms(films, values)
-    hideNotFoundMessage()
+    setMessage('')
     setViewFilms(filterFilmsList)
     if (!filterFilmsList.length) showNotFoundMessage()
   }
@@ -53,12 +54,8 @@ function SavedMovies({ getLikeFilms, handleClickLikeButton, setIsShowMenu }) {
   }
 
   function showNotFoundMessage() {
-    setMessage('Ничего не найдено')
+    setMessage(MESSAGES.NOT_FOUND)
     setViewFilms([])
-  }
-
-  function hideNotFoundMessage() {
-    setMessage('')
   }
 
   return (
