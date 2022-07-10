@@ -6,10 +6,10 @@ import ErrorText from "../../components/ErrorText/ErrorText";
 import AuthLayout from '../../layouts/AuthLayout/AuthLayout';
 
 import { useFormWithValidation } from '../../hooks/useFormWithValidation'
-import { INPUTS } from '../../utils/constants'
+import { VALIDATION_CONFIGS } from '../../utils/constants'
 
 function Login({ handleLogin }) {
-  const { values, errors, isValid, handleChange } = useFormWithValidation({ email: '', password: '' })
+  const { values, errors, isValid, handleChange } = useFormWithValidation({ email: '', password: '' }, VALIDATION_CONFIGS.LOGIN)
 
   function handleSubmitForm(evt) {
     evt.preventDefault()
@@ -21,22 +21,22 @@ function Login({ handleLogin }) {
       <form className="form form-login" onSubmit={handleSubmitForm} name='login'>
         <Label
           text='E-mail'
-          type={INPUTS.EMAIL}
-          name={INPUTS.EMAIL}
+          type='email'
+          name='email'
           onInput={handleChange}
-          isValid={!errors[INPUTS.EMAIL]}
-          value={values[INPUTS.EMAIL]}
+          isValid={!errors.email}
+          value={values.email}
         />
-        {errors[INPUTS.EMAIL] && <ErrorText type='auth'>{errors[INPUTS.EMAIL]}</ErrorText>}
+        {errors.email && <ErrorText type='auth'>{errors.email}</ErrorText>}
         <Label
           text='Пароль'
-          type={INPUTS.PASSWORD}
-          name={INPUTS.PASSWORD}
+          type='password'
+          name='password'
           onInput={handleChange}
-          isValid={!errors[INPUTS.PASSWORD]}
-          value={values[INPUTS.PASSWORD]}
+          isValid={!errors.password}
+          value={values.password}
         />
-        {errors[INPUTS.PASSWORD] && <ErrorText type='auth'>{errors[INPUTS.PASSWORD]}</ErrorText>}
+        {errors.password && <ErrorText type='auth'>{errors.password}</ErrorText>}
         <AuthButton
           isDisabled={!isValid}
         />

@@ -7,10 +7,10 @@ import AuthButton from "../../components/AuthButton/AuthButton";
 import ErrorText from "../../components/ErrorText/ErrorText";
 import AuthLayout from '../../layouts/AuthLayout/AuthLayout';
 
-import { INPUTS, PATTERNS } from '../../utils/constants'
+import { VALIDATION_CONFIGS } from '../../utils/constants'
 
 function Register({ handleRegister }) {
-  const { values, errors, isValid, handleChange } = useFormWithValidation({ name: '', email: '', password: '' })
+  const { values, errors, isValid, handleChange } = useFormWithValidation({ name: '', email: '', password: '' }, VALIDATION_CONFIGS.USER_DATA)
 
   function handleSubmitForm(evt) {
     evt.preventDefault()
@@ -22,32 +22,30 @@ function Register({ handleRegister }) {
       <form className="form form-register" onSubmit={handleSubmitForm} name='register' noValidate>
         <Label
           text='Имя'
-          name={INPUTS.NAME}
+          name='name'
           onInput={handleChange}
-          isValid={!errors[INPUTS.NAME]}
-          value={values[INPUTS.NAME]}
-          pattern={PATTERNS.NAME}
-          title='Имя может состоять из букв, пробелов и -'
+          isValid={!errors.name}
+          value={values.name}
         />
-        {errors[INPUTS.NAME] && <ErrorText type='auth'>{errors[INPUTS.NAME]}</ErrorText>}
+        {errors.name && <ErrorText type='auth'>{errors.name}</ErrorText>}
         <Label
           text='E-mail'
-          name={INPUTS.EMAIL}
-          type={INPUTS.EMAIL}
+          name='email'
+          type='email'
           onInput={handleChange}
-          isValid={!errors[INPUTS.EMAIL]}
-          value={values[INPUTS.EMAIL]}
+          isValid={!errors.email}
+          value={values.email}
         />
-        {errors[INPUTS.EMAIL] && <ErrorText type='auth'>{errors[INPUTS.EMAIL]}</ErrorText>}
+        {errors.email && <ErrorText type='auth'>{errors.email}</ErrorText>}
         <Label
           text='Пароль'
-          name={INPUTS.PASSWORD}
-          type={INPUTS.PASSWORD}
+          name='password'
+          type='password'
           onInput={handleChange}
-          isValid={!errors[INPUTS.PASSWORD]}
-          value={values[INPUTS.PASSWORD]}
+          isValid={!errors.password}
+          value={values.password}
         />
-        {errors[INPUTS.PASSWORD] && <ErrorText type='auth'>{errors[INPUTS.PASSWORD]}</ErrorText>}
+        {errors.password && <ErrorText type='auth'>{errors.password}</ErrorText>}
         <AuthButton
           isDisabled={!isValid}
         />

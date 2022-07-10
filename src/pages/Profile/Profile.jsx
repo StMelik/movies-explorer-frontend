@@ -5,6 +5,7 @@ import './Profile.css';
 import HeaderLayout from "../../layouts/HeaderLayout/HeaderLayout";
 
 import { useFormWithValidation } from '../../hooks/useFormWithValidation'
+import { VALIDATION_PARAMS } from '../../utils/constants'
 
 function Profile({ handleUpdateUser, currentUser, handleSignOut, setIsShowMenu }) {
   const startValues = {
@@ -14,12 +15,14 @@ function Profile({ handleUpdateUser, currentUser, handleSignOut, setIsShowMenu }
 
   const { values, isValid, handleChange, setIsValid } = useFormWithValidation(startValues)
 
-  // Проверить что данные изменились от первоначальных
+  // Проверить что данные изменились и валидны
   useEffect(() => {
+    const isValidName = VALIDATION_PARAMS.REGEX.NAME.test(values.name)
+    const isValidEmail = VALIDATION_PARAMS.REGEX.EMAIL.test(values.email)
     const isChangeName = values.name !== currentUser.name
     const isChangeEmail = values.email !== currentUser.email
 
-    isChangeName || isChangeEmail
+    isValidName && isValidEmail && (isChangeName || isChangeEmail)
       ? setIsValid(true)
       : setIsValid(false)
   }, [values])

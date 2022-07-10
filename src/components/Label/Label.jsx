@@ -1,9 +1,7 @@
 import './Label.css';
 
-import { INPUTS } from '../../utils/constants'
-
-function Label({ text, name, type = 'text', onInput, isValid, value, pattern, title }) {
-  const isPassword = type === INPUTS.PASSWORD
+function Label({ text, name, type = 'text', onInput, isValid, value }) {
+  const isPassword = type === 'password'
 
   function getPlaceholder(text) {
     const lowerText = text.toLowerCase()
@@ -26,8 +24,6 @@ function Label({ text, name, type = 'text', onInput, isValid, value, pattern, ti
         name={name}
         onInput={onInput}
         value={value}
-        pattern={pattern}
-        title={title}
       />
     </label>
   );

@@ -1,11 +1,36 @@
-const INPUTS = {
-    NAME: 'name',
-    EMAIL: 'email',
-    PASSWORD: 'password',
+const VALIDATION_PARAMS = {
+    REGEX: {
+        NAME: /^[a-zа-яё-\s]+$/i,
+        EMAIL: /[^@\s]+@[^@\s]+\.[^@\s]+/i,
+    },
+    MESSAGES: {
+        NAME: 'Имя может состоять только из букв, пробелов и "-"',
+        EMAIL: 'Неправильный формат e-mail',
+    }
 }
 
-const PATTERNS = {
-    NAME: '([A-Za-zа-яёА-ЯЁ]| |-)*'
+const VALIDATION_CONFIGS = {
+    USER_DATA: {
+        INPUTS: ['name', 'email'],
+        REGEX: {
+            name: VALIDATION_PARAMS.REGEX.NAME,
+            email: VALIDATION_PARAMS.REGEX.EMAIL,
+        },
+        MESSAGES: {
+            name: VALIDATION_PARAMS.MESSAGES.NAME,
+            email: VALIDATION_PARAMS.MESSAGES.EMAIL,
+        }
+    },
+
+    LOGIN: {
+        INPUTS: ['email'],
+        REGEX: {
+            email: VALIDATION_PARAMS.REGEX.EMAIL,
+        },
+        MESSAGES: {
+            email: VALIDATION_PARAMS.MESSAGES.EMAIL,
+        }
+    }
 }
 
 const MESSAGES = {
@@ -59,4 +84,4 @@ const BASE_URL = 'https://api.nomoreparties.co'
 
 const SHORT_DURATION = 40
 
-export { INPUTS, PATTERNS, MESSAGES, PAGES, BASE_URL, CARD_COUNT, CARD_BRAKEPOINT, SHORT_DURATION, ALERT_MESSAGES }
+export { MESSAGES, PAGES, BASE_URL, CARD_COUNT, CARD_BRAKEPOINT, SHORT_DURATION, ALERT_MESSAGES, VALIDATION_PARAMS, VALIDATION_CONFIGS }
