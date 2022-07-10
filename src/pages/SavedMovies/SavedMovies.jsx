@@ -10,52 +10,62 @@ import { filterFilms } from '../../utils/filterFilms'
 import { MESSAGES, SHORT_DURATION } from '../../utils/constants'
 
 function SavedMovies({ requestLikeFilms, handleClickLikeButton, setIsShowMenu }) {
-  const [films, setFilms] = useState([])
-  const [viewFilms, setViewFilms] = useState([])
+  const [likedFilms, setLikedFilms] = useState(null)
+  const [displayedFilms, setDisplayedFilms] = useState(null)
+
+  const [errorMessage, setErrorMessage] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
-  const [message, setMessage] = useState('')
 
   useEffect(() => {
-    getFilms()
+    getLikeFilms()
   }, [])
 
-  useEffect(() => {
-    setMessage('')
-    if (!films.length) showNotFoundMessage()
-  }, [films])
-
-  function setAllFilms(films) {
-    setFilms(films)
-    setViewFilms(films)
-  }
-
-  function getFilms() {
-    setIsLoading(true)
+  function getLikeFilms() {
+    startLoader()
     requestLikeFilms()
-      .then(setAllFilms)
+      .then(films => {
+        setAllFilms(films)
+        hideErrorMessage()
+      })
       .catch(() => {
-        setMessage(MESSAGES.ERROR)
+        showErrorMessage(MESSAGES.ERROR)
       })
       .finally(() => {
-        setIsLoading(false)
+        stopLoader()
       })
   }
 
   function searchFilms(values) {
-    const filterFilmsList = filterFilms(films, SHORT_DURATION, values)
-    setMessage('')
-    setViewFilms(filterFilmsList)
-    if (!filterFilmsList.length) showNotFoundMessage()
+    const films = filterFilms(likedFilms, SHORT_DURATION, values)
+    setDisplayedFilms(films)
+
+    films?.length ? hideErrorMessage() : showErrorMessage(MESSAGES.NOT_FOUND)
   }
 
-  function deleteFilm(filmId) {
+  function handleDeleteFilm(filmId) {
     handleClickLikeButton(filmId)
-      .then(() => setAllFilms(films.filter(film => film._id !== filmId)))
+      .then(() => setAllFilms(likedFilms.filter(film => film._id !== filmId)))
   }
 
-  function showNotFoundMessage() {
-    setMessage(MESSAGES.NOT_FOUND)
-    setViewFilms([])
+  function setAllFilms(films) {
+    setLikedFilms(films)
+    setDisplayedFilms(films)
+  }
+
+  function startLoader() {
+    setIsLoading(true)
+  }
+
+  function stopLoader() {
+    setIsLoading(false)
+  }
+
+  function showErrorMessage(message) {
+    setErrorMessage(message)
+  }
+
+  function hideErrorMessage() {
+    setErrorMessage(null)
   }
 
   return (
@@ -69,10 +79,10 @@ function SavedMovies({ requestLikeFilms, handleClickLikeButton, setIsShowMenu })
             type="saved-movies"
           />
           <MoviesCardList
-            films={viewFilms}
+            films={displayedFilms}
             isLoading={isLoading}
-            message={message}
-            handleClickLikeButton={deleteFilm}
+            message={errorMessage}
+            handleClickLikeButton={handleDeleteFilm}
           />
         </div>
       </div>
