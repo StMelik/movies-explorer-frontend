@@ -1,7 +1,7 @@
 const INPUTS = {
     NAME: 'name',
     EMAIL: 'email',
-    PASSWORD: 'password'
+    PASSWORD: 'password',
 }
 
 const PATTERNS = {
@@ -13,4 +13,32 @@ const MESSAGES = {
     ERROR: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз'
 }
 
-export { INPUTS, PATTERNS, MESSAGES }
+const PAGES = {
+    MOVIES: '/movies',
+    SAVED_MOVIES: '/saved-movies',
+    PROFILE: '/profile',
+    SIGNIN: '/signin',
+    SIGNUP: '/signup',
+    MAIN: '/',
+}
+
+const CARD_COUNT = {
+    SMALL_DEVICE: {
+        ADD: 2,
+        START: 5
+    },
+    MIDDLE_DEVICE: {
+        ADD: 2,
+        START: 8
+    },
+    BIG_DEVICE: {
+        ADD: 3,
+        START: 12
+    },
+}
+
+const BASE_URL = 'https://api.nomoreparties.co'
+
+const SHORT_DURATION = 40
+
+export { INPUTS, PATTERNS, MESSAGES, PAGES, BASE_URL, CARD_COUNT, SHORT_DURATION }

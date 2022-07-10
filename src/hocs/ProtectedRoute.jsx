@@ -2,6 +2,8 @@ import { Redirect, Route } from "react-router-dom";
 
 import Preloader from "../components/Preloader/Preloader";
 
+import { PAGES } from '../utils/constants'
+
 function ProtectedRoute({ isLoggedIn, isPreloader, component: Component, ...props }) {
     return (
         <Route>
@@ -9,7 +11,7 @@ function ProtectedRoute({ isLoggedIn, isPreloader, component: Component, ...prop
                 ? <Preloader />
                 : isLoggedIn
                     ? <Component {...props} />
-                    : <Redirect to='/' />}
+                    : <Redirect to={PAGES.MAIN} />}
         </Route>
     )
 }

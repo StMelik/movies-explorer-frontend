@@ -8,18 +8,18 @@ import Navigation from "../Navigation/Navigation";
 import ProfileButton from "../ProfileButton/ProfileButton";
 
 import { AppStateContext } from '../../contexts/AppStateContext'
+import { PAGES } from '../../utils/constants'
 
 function Header({ setIsShowMenu }) {
   const { isLoggedIn } = useContext(AppStateContext)
-  const currentPath = useHistory().location.pathname
-  const isMainPage = currentPath === '/'
+  const isMainPage = useHistory().location.pathname === PAGES.MAIN
 
   const buttons = isLoggedIn ? (
     <ProfileButton />
   ) : (
     <div className="header__buttons">
-      <Link className="header__button" to='/signup'>Регистрация</Link>
-      <Link className="header__button header__button_color_green" to='/signin'>Войти</Link>
+      <Link className="header__button" to={PAGES.SIGNUP}>Регистрация</Link>
+      <Link className="header__button header__button_color_green" to={PAGES.SIGNIN}>Войти</Link>
     </div>
   )
 

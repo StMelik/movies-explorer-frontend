@@ -6,13 +6,12 @@ import './AuthButton.css';
 import ErrorText from "../../components/ErrorText/ErrorText";
 
 import { AppStateContext } from '../../contexts/AppStateContext'
+import { PAGES } from '../../utils/constants'
 
 function AuthButton({ isDisabled }) {
   const { loaderButton, isFetchError } = useContext(AppStateContext)
 
-  const currentPath = useHistory().location.pathname
-  const isSignIn = currentPath === '/signin'
-  const link = isSignIn ? '/signup' : '/signin'
+  const isSignIn = useHistory().location.pathname === PAGES.SIGNIN
   const textButton = isSignIn
     ? loaderButton ? 'Вход...' : 'Войти'
     : loaderButton ? 'Регистрация...' : 'Зарегистрироваться'
@@ -22,7 +21,7 @@ function AuthButton({ isDisabled }) {
       <p className="auth__question-text">
         {isSignIn ? 'Ещё не зарегистрированы?' : 'Уже зарегистрированы?'}
       </p>
-      <Link className="auth__question-link" to={link}>
+      <Link className="auth__question-link" to={isSignIn ? PAGES.SIGNUP : PAGES.SIGNIN}>
         {isSignIn ? 'Регистрация' : 'Войти'}
       </Link>
     </div>

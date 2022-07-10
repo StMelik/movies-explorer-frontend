@@ -2,6 +2,8 @@ import { NavLink } from "react-router-dom";
 
 import './Navigation.css';
 
+import { PAGES } from '../../utils/constants'
+
 function Navigation() {
   return (
     <nav className="header__nav nav">
@@ -9,12 +11,12 @@ function Navigation() {
         <li><NavLink
           className="nav__link"
           activeClassName="nav__link_active"
-          to="/movies"
+          to={PAGES.MOVIES}
         >Фильмы</NavLink></li>
         <li><NavLink
           className="nav__link"
           activeClassName="nav__link_active"
-          to="/saved-movies"
+          to={PAGES.SAVED_MOVIES}
         >Сохранённые фильмы</NavLink></li>
       </ul>
     </nav>

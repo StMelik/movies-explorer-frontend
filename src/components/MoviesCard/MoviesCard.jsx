@@ -4,15 +4,12 @@ import { useHistory } from "react-router-dom";
 import './MoviesCard.css';
 
 import { formatDuration } from '../../utils/formatDuration'
+import { BASE_URL, PAGES } from '../../utils/constants'
 
 function MoviesCard({ film, handleClickLikeButton }) {
   const [filmId, setFilmId] = useState('')
-
-  const currentPath = useHistory().location.pathname
-  const isSavedMovies = currentPath === '/saved-movies'
-
-  const baseUrl = 'https://api.nomoreparties.co'
-  const imageUrl = film.thumbnail || `${baseUrl}/${film.image.formats.thumbnail.url}`
+  const isSavedMovies = useHistory().location.pathname === PAGES.SAVED_MOVIES
+  const imageUrl = film.thumbnail || `${BASE_URL}/${film.image.formats.thumbnail.url}`
 
   useEffect(() => {
     const filmId = film._id
@@ -29,11 +26,11 @@ function MoviesCard({ film, handleClickLikeButton }) {
         duration: film.duration,
         year: film.year,
         description: film.description,
-        image: baseUrl + film.image.url,
+        image: BASE_URL + film.image.url,
         trailerLink: film.trailerLink,
         nameRU: film.nameRU,
         nameEN: film.nameEN || '-',
-        thumbnail: baseUrl + film.image.formats.thumbnail.url,
+        thumbnail: BASE_URL + film.image.formats.thumbnail.url,
         movieId: film.id,
       }
 

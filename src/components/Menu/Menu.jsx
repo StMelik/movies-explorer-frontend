@@ -4,6 +4,8 @@ import './Menu.css';
 
 import ProfileButton from '../ProfileButton/ProfileButton';
 
+import { PAGES } from '../../utils/constants'
+
 function Menu({ isShowMenu, setIsShowMenu }) {
   return (
     <div className={isShowMenu ? 'menu menu_active' : 'menu'}>
@@ -19,7 +21,7 @@ function Menu({ isShowMenu, setIsShowMenu }) {
               <NavLink
                 className="menu__nav-link"
                 activeClassName="menu__nav-link_active"
-                to="/"
+                to={PAGES.MAIN}
                 exact
               >Главная</NavLink>
             </li>
@@ -27,14 +29,14 @@ function Menu({ isShowMenu, setIsShowMenu }) {
               <NavLink
                 className="menu__nav-link"
                 activeClassName="menu__nav-link_active"
-                to="/movies"
+                to={PAGES.MOVIES}
               >Фильмы</NavLink>
             </li>
             <li>
               <NavLink
                 className="menu__nav-link"
                 activeClassName="menu__nav-link_active"
-                to="/saved-movies"
+                to={PAGES.SAVED_MOVIES}
               >Сохранённые фильмы</NavLink>
             </li>
           </ul>

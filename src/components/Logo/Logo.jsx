@@ -4,11 +4,13 @@ import './Logo.css';
 
 import logo from '../../images/logo.svg'
 
+import { PAGES } from '../../utils/constants'
+
 function Logo() {
   const history = useHistory()
 
   function handleClick() {
-    history.push("/");
+    history.push(PAGES.MAIN);
   }
 
   return (

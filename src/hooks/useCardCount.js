@@ -1,31 +1,31 @@
 import { useState } from "react";
 
-export function useCardCount(countFilm, startCountFilm) {
+export function useCardCount(CARD_COUNT) {
     // Кол-во загружаемых фильмов
-    const [countFilms, setCountFilms] = useState(countFilm)
+    const [countAddFilms, setCountAddFilms] = useState(0)
     // Кол-во первоночально отоброжаемых фильмов
-    const [startCountFilms, setStartCountFilms] = useState(startCountFilm)
+    const [startCountFilms, setStartCountFilms] = useState(0)
 
     function setParamsCountFilms(mode) {
         const deviceWidth = document.documentElement.clientWidth
-        const threeCardWidth = 1007
-        const twoCardWidth = 677
+        const threeCardWidth = 1000
+        const twoCardWidth = 700
         const isUpdate = mode === 'all'
 
         const middleDevice = deviceWidth <= threeCardWidth && deviceWidth > twoCardWidth
         const smallDevice = deviceWidth <= twoCardWidth && deviceWidth >= 320
 
         if (middleDevice) {
-            setCountFilms(2)
-            isUpdate && setStartCountFilms(8)
+            setCountAddFilms(CARD_COUNT.MIDDLE_DEVICE.ADD)
+            isUpdate && setStartCountFilms(CARD_COUNT.MIDDLE_DEVICE.START)
         } else if (smallDevice) {
-            setCountFilms(2)
-            isUpdate && setStartCountFilms(5)
+            setCountAddFilms(CARD_COUNT.SMALL_DEVICE.ADD)
+            isUpdate && setStartCountFilms(CARD_COUNT.SMALL_DEVICE.START)
         } else {
-            setCountFilms(3)
-            isUpdate && setStartCountFilms(12)
+            setCountAddFilms(CARD_COUNT.BIG_DEVICE.ADD)
+            isUpdate && setStartCountFilms(CARD_COUNT.BIG_DEVICE.START)
         }
     }
 
-    return { countFilms, startCountFilms, setParamsCountFilms };
+    return { countAddFilms, startCountFilms, setParamsCountFilms };
 }

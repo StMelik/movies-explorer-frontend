@@ -9,7 +9,7 @@ import HeaderAndFooterLayout from '../../layouts/HeaderAndFooterLayout/HeaderAnd
 import LoacalStorage from '../../utils/LocalStorage';
 import { filterFilms } from '../../utils/filterFilms'
 import { formatLikedFilms, setLike } from '../../utils/likes'
-import { MESSAGES } from '../../utils/constants'
+import { MESSAGES, CARD_COUNT, SHORT_DURATION } from '../../utils/constants'
 import { useCardCount } from '../../hooks/useCardCount'
 
 function Movies({ getAllFilms, getLikeFilms, handleClickLikeButton, setIsShowMenu }) {
@@ -25,7 +25,7 @@ function Movies({ getAllFilms, getLikeFilms, handleClickLikeButton, setIsShowMen
   // Сообщение об ошибке или что фильмы не найдены
   const [message, setMessage] = useState(null)
 
-  const { countFilms, startCountFilms, setParamsCountFilms } = useCardCount(3, 12)
+  const { countAddFilms, startCountFilms, setParamsCountFilms } = useCardCount(CARD_COUNT)
 
   // Локальное хранилище
   const filmsLocal = new LoacalStorage('films')
@@ -33,7 +33,6 @@ function Movies({ getAllFilms, getLikeFilms, handleClickLikeButton, setIsShowMen
   // Установить количество загружаемых фильмов
   useEffect(() => {
     setFilms(filmsLocal.load())
-
     setParamsCountFilms('all')
     window.addEventListener('resize', setParamsCountFilms)
     return () => {
@@ -65,7 +64,7 @@ function Movies({ getAllFilms, getLikeFilms, handleClickLikeButton, setIsShowMen
   // Получить отфильтрованные фильмы
   useEffect(() => {
     if (values && allFilms) {
-      const filtredFilms = filterFilms(allFilms.all, values)
+      const filtredFilms = filterFilms(allFilms.all, SHORT_DURATION, values)
       const isNotFiltredFilms = !filtredFilms.length
       if (isNotFiltredFilms) setMessage(MESSAGES.NOT_FOUND)
 
@@ -87,7 +86,7 @@ function Movies({ getAllFilms, getLikeFilms, handleClickLikeButton, setIsShowMen
   // Показать еще фильмы
   function showMoreFilms() {
     const startIndex = viewFilms.length
-    const endIndex = startIndex + countFilms
+    const endIndex = startIndex + countAddFilms
 
     setViewFilms([...viewFilms, ...films.slice(startIndex, endIndex)])
   }
