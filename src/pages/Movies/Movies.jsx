@@ -9,7 +9,7 @@ import HeaderAndFooterLayout from '../../layouts/HeaderAndFooterLayout/HeaderAnd
 import LoacalStorage from '../../utils/LocalStorage';
 import { filterFilms } from '../../utils/filterFilms'
 import { formatLikedFilms, setLike } from '../../utils/likes'
-import { MESSAGES, CARD_COUNT, SHORT_DURATION } from '../../utils/constants'
+import { MESSAGES, CARD_COUNT, CARD_BRAKEPOINT, SHORT_DURATION } from '../../utils/constants'
 import { useCardCount } from '../../hooks/useCardCount'
 
 function Movies({ getAllFilms, getLikeFilms, handleClickLikeButton, setIsShowMenu }) {
@@ -25,7 +25,7 @@ function Movies({ getAllFilms, getLikeFilms, handleClickLikeButton, setIsShowMen
   // Сообщение об ошибке или что фильмы не найдены
   const [message, setMessage] = useState(null)
 
-  const { countAddFilms, startCountFilms, setParamsCountFilms } = useCardCount(CARD_COUNT)
+  const { countAddFilms, startCountFilms, setParamsCountFilms } = useCardCount(CARD_COUNT, CARD_BRAKEPOINT)
 
   // Локальное хранилище
   const filmsLocal = new LoacalStorage('films')
