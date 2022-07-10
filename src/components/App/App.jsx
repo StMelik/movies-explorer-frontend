@@ -11,13 +11,14 @@ import SavedMovies from '../../pages/SavedMovies/SavedMovies'
 import Main from '../../pages/Main/Main'
 import NotFound from '../../pages/404/NotFound'
 import Menu from "../Menu/Menu";
+import Alert from "../Alert/Alert";
 
 import ProtectedRoute from "../../hocs/ProtectedRoute";
 import { AppStateContext } from '../../contexts/AppStateContext'
 import MainApi from "../../utils/MainApi";
 import MoviesApi from '../../utils/MoviesApi'
 import { optionsMainApi, optionsMoviesApi } from '../../utils/optionsApi'
-import { PAGES } from '../../utils/constants'
+import { PAGES, ALERT__MESSAGES } from '../../utils/constants'
 import LocalStorage from "../../utils/LocalStorage";
 
 function App() {
@@ -36,7 +37,8 @@ function App() {
 
   const [isPreloader, setIsPreloader] = useState(true)
 
-  // const [allFilms, setAllFilms] = useState([])
+  const [messageAlert, setMessageAlert] = useState(null)
+  const [isActiveAlert, setIsActiveAlert] = useState(false)
 
   const history = useHistory()
   const location = useLocation()
@@ -110,6 +112,10 @@ function App() {
         if (!isLoggedIn) setIsLoggedIn(true)
         setCurrentUser(user)
       })
+      .catch(() => {
+        showAlert(ALERT__MESSAGES.ERROR.GET_USER)
+        throw new Error()
+      })
       .finally(() => {
         setIsPreloader(false)
       })
@@ -120,6 +126,11 @@ function App() {
     return mainApi.updateUserInfo(user, token)
       .then(newData => {
         setCurrentUser(newData)
+        showAlert(ALERT__MESSAGES.SUCCESSFULLY.UPDATE_PROFILE)
+      })
+      .catch(() => {
+        showAlert(ALERT__MESSAGES.ERROR.UPDATE_PROFILE)
+        throw new Error()
       })
   }
 
@@ -154,12 +165,28 @@ function App() {
   function handleClickLikeButton(filmId, film) {
     return filmId
       ? mainApi.deleteLikeFilm(filmId, token)
+        .catch(() => {
+          showAlert(ALERT__MESSAGES.ERROR.DELETE_FILM)
+          throw new Error()
+        })
       : mainApi.addLikeFilm(film, token)
+        .catch(() => {
+          showAlert(ALERT__MESSAGES.ERROR.ADD_FILM)
+          throw new Error()
+        })
   }
 
   // Запросить лайкнутые фильмы
   function requestLikeFilms() {
     return mainApi.fetchLikeFilms(token)
+  }
+
+  function showAlert(message) {
+    setMessageAlert(message)
+    setIsActiveAlert(true)
+    setTimeout(() => {
+      setIsActiveAlert(false)
+    }, 3000)
   }
 
   return (
@@ -236,6 +263,10 @@ function App() {
           setIsShowMenu={setIsShowMenu}
         />
       </AppStateContext.Provider>
+      <Alert
+        messageAlert={messageAlert}
+        isActiveAlert={isActiveAlert}
+      />
     </>
   );
 }

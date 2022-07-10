@@ -2,15 +2,11 @@ import { useEffect, useState } from "react";
 
 import './Profile.css';
 
-import Alert from "../../components/Alert/Alert";
 import HeaderLayout from "../../layouts/HeaderLayout/HeaderLayout";
 
 import { useFormWithValidation } from '../../hooks/useFormWithValidation'
 
 function Profile({ handleUpdateUser, currentUser, handleSignOut, setIsShowMenu }) {
-  const [showAlert, setShowAlert] = useState(false)
-  const [messageAlert, setMessageAlert] = useState('')
-
   const startValues = {
     name: currentUser.name,
     email: currentUser.email
@@ -30,19 +26,7 @@ function Profile({ handleUpdateUser, currentUser, handleSignOut, setIsShowMenu }
 
   function clickUpdateButton() {
     handleUpdateUser(values)
-      .then(() => {
-        setMessageAlert('Данные профиля успешно обновлены!')
-        setIsValid(false)
-      })
-      .catch(() => {
-        setMessageAlert('Не удалось обновить данные профиля!')
-      })
-      .finally(() => {
-        setShowAlert(true)
-        setTimeout(() => {
-          setShowAlert(false)
-        }, 3000)
-      })
+      .then(() => setIsValid(false))
   }
 
   function clickSignOutButton() {
@@ -102,10 +86,6 @@ function Profile({ handleUpdateUser, currentUser, handleSignOut, setIsShowMenu }
             </div>
           </div>
         </div>
-        <Alert
-          showAlert={showAlert}
-          messageAlert={messageAlert}
-        />
       </div>
     </HeaderLayout>
   );

@@ -1,9 +1,9 @@
 import './Alert.css';
 
-function Alert({ showAlert, messageAlert }) {
+function Alert({ isActiveAlert, messageAlert }) {
   return (
     <div className={
-      showAlert
+      isActiveAlert
         ? 'alert alert_active'
         : 'alert'
     }>
