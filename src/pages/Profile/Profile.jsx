@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import './Profile.css';
 
@@ -17,6 +17,16 @@ function Profile({ handleUpdateUser, currentUser, handleSignOut, setIsShowMenu }
   }
 
   const { values, isValid, handleChange, setIsValid } = useFormWithValidation(startValues)
+
+  // Проверить что данные изменились от первоначальных
+  useEffect(() => {
+    const isChangeName = values.name !== currentUser.name
+    const isChangeEmail = values.email !== currentUser.email
+
+    isChangeName || isChangeEmail
+      ? setIsValid(true)
+      : setIsValid(false)
+  }, [values])
 
   function clickUpdateButton() {
     handleUpdateUser(values)
