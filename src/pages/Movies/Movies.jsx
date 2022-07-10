@@ -11,7 +11,7 @@ import { formatLikedFilms, setLike } from '../../utils/likes'
 import { MESSAGES, CARD_COUNT, CARD_BRAKEPOINT, SHORT_DURATION } from '../../utils/constants'
 import { useCardCount } from '../../hooks/useCardCount'
 
-function Movies({ requestAllFilms, requestLikeFilms, handleClickLikeButton, setIsShowMenu, filmsLocal }) {
+function Movies({ requestAllFilms, requestLikeFilms, handleClickLikeButton, setIsShowMenu, filmsLocal, searchQueryMoviesLocal }) {
 
   // Фильмы
   const [allFilms, setAllFilms] = useState(null)
@@ -144,7 +144,7 @@ function Movies({ requestAllFilms, requestLikeFilms, handleClickLikeButton, setI
         <div className="container movies__container">
           <SearchForm
             searchFilms={searchFilms}
-            type='movies'
+            searchQueryLocal={searchQueryMoviesLocal}
           />
           <MoviesCardList
             films={displayedFilms}

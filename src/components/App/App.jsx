@@ -45,6 +45,8 @@ function App() {
   const moviesApi = new MoviesApi(optionsMoviesApi)
   const jwtLocal = new LocalStorage('jwt')
   const filmsLocal = new LocalStorage('films')
+  const searchQueryMoviesLocal = new LocalStorage('search-query-movies', { film: '', short: false })
+  const searchQuerySavedMoviesLocal = new LocalStorage('search-query-saved-movies', { film: '', short: false })
 
   useEffect(() => {
     document.body.style.overflow = isShowMenu ? 'hidden' : ''
@@ -121,12 +123,19 @@ function App() {
       })
   }
 
+  function clearLocal() {
+    jwtLocal.delete()
+    filmsLocal.delete()
+    searchQueryMoviesLocal.delete()
+    searchQuerySavedMoviesLocal.delete()
+  }
+
   // Выйти из профиля
   function handleSignOut() {
     setIsLoggedIn(false)
     setToken('')
     setCurrentUser({})
-    jwtLocal.delete()
+    clearLocal()
     history.push(PAGES.MAIN)
   }
 
@@ -168,6 +177,7 @@ function App() {
             component={Movies}
             isPreloader={isPreloader}
             filmsLocal={filmsLocal}
+            searchQueryMoviesLocal={searchQueryMoviesLocal}
           />
 
           <ProtectedRoute
@@ -179,6 +189,7 @@ function App() {
             setIsShowMenu={setIsShowMenu}
             component={SavedMovies}
             isPreloader={isPreloader}
+            searchQuerySavedMoviesLocal={searchQuerySavedMoviesLocal}
           />
 
           <ProtectedRoute

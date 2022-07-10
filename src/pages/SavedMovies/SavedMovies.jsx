@@ -9,7 +9,7 @@ import HeaderAndFooterLayout from '../../layouts/HeaderAndFooterLayout/HeaderAnd
 import { filterFilms } from '../../utils/filterFilms'
 import { MESSAGES, SHORT_DURATION } from '../../utils/constants'
 
-function SavedMovies({ requestLikeFilms, handleClickLikeButton, setIsShowMenu }) {
+function SavedMovies({ requestLikeFilms, handleClickLikeButton, setIsShowMenu, searchQuerySavedMoviesLocal }) {
   const [likedFilms, setLikedFilms] = useState(null)
   const [displayedFilms, setDisplayedFilms] = useState(null)
 
@@ -76,7 +76,7 @@ function SavedMovies({ requestLikeFilms, handleClickLikeButton, setIsShowMenu })
         <div className="container movies__container">
           <SearchForm
             searchFilms={searchFilms}
-            type="saved-movies"
+            searchQueryLocal={searchQuerySavedMoviesLocal}
           />
           <MoviesCardList
             films={displayedFilms}

@@ -4,18 +4,14 @@ import './SearchForm.css';
 
 import ErrorText from "../../components/ErrorText/ErrorText";
 
-import LoacalStorage from '../../utils/LocalStorage';
 import { useFormWithValidation } from '../../hooks/useFormWithValidation'
 
-function SearchForm({ searchFilms, type }) {
+function SearchForm({ searchFilms, searchQueryLocal }) {
   const startValue = { film: '', short: false }
 
   const { values, isValid, handleChange, setValues, setIsValid } = useFormWithValidation(startValue)
   // Состояние ошибки поиска 
   const [isSearchError, setIsSearchError] = useState(false)
-
-  // Локальное хранилище
-  const searchQueryLocal = new LoacalStorage(`search-query-${type}`, startValue)
 
   useEffect(() => {
     const searchQuery = searchQueryLocal.load()
@@ -23,7 +19,6 @@ function SearchForm({ searchFilms, type }) {
     setValues(searchQuery)
     if (searchQuery) setIsValid(true)
   }, [])
-
 
   // Поиск фильмов при изменении состояния чекбокса
   function onChangeCheckbox(evt) {
