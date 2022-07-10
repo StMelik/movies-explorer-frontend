@@ -9,7 +9,7 @@ import HeaderAndFooterLayout from '../../layouts/HeaderAndFooterLayout/HeaderAnd
 import { filterFilms } from '../../utils/filterFilms'
 import { MESSAGES, SHORT_DURATION } from '../../utils/constants'
 
-function SavedMovies({ getLikeFilms, handleClickLikeButton, setIsShowMenu }) {
+function SavedMovies({ requestLikeFilms, handleClickLikeButton, setIsShowMenu }) {
   const [films, setFilms] = useState([])
   const [viewFilms, setViewFilms] = useState([])
   const [isLoading, setIsLoading] = useState(false)
@@ -31,7 +31,7 @@ function SavedMovies({ getLikeFilms, handleClickLikeButton, setIsShowMenu }) {
 
   function getFilms() {
     setIsLoading(true)
-    getLikeFilms()
+    requestLikeFilms()
       .then(setAllFilms)
       .catch(() => {
         setMessage(MESSAGES.ERROR)

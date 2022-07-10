@@ -44,6 +44,7 @@ function App() {
   const mainApi = new MainApi(optionsMainApi)
   const moviesApi = new MoviesApi(optionsMoviesApi)
   const jwtLocal = new LocalStorage('jwt')
+  const filmsLocal = new LocalStorage('films')
 
   useEffect(() => {
     document.body.style.overflow = isShowMenu ? 'hidden' : ''
@@ -58,8 +59,8 @@ function App() {
     handleLoginToken()
   }, [])
 
-  // Получить все фильмы
-  function getAllFilms() {
+  // Запросить все фильмы
+  function requestAllFilms() {
     return moviesApi.getFilms()
   }
 
@@ -90,7 +91,7 @@ function App() {
         setIsLoggedIn(true)
         jwtLocal.save(token)
         getUserInfo(token)
-        history.push('/movies')
+        history.push(PAGES.MOVIES)
       })
       .catch(() => {
         setIsFetchError(true)
@@ -126,7 +127,7 @@ function App() {
     setToken('')
     setCurrentUser({})
     jwtLocal.delete()
-    history.push('/')
+    history.push(PAGES.MAIN)
   }
 
   // Вход по токену
@@ -147,9 +148,9 @@ function App() {
       : mainApi.addLikeFilm(film, token)
   }
 
-  // Получить лайкнутые фильмы
-  function getLikeFilms() {
-    return mainApi.getLikeFilms(token)
+  // Запросить лайкнутые фильмы
+  function requestLikeFilms() {
+    return mainApi.fetchLikeFilms(token)
   }
 
   return (
@@ -160,12 +161,13 @@ function App() {
             path={PAGES.MOVIES}
             exact
             isLoggedIn={isLoggedIn}
-            getAllFilms={getAllFilms}
+            requestAllFilms={requestAllFilms}
             handleClickLikeButton={handleClickLikeButton}
-            getLikeFilms={getLikeFilms}
+            requestLikeFilms={requestLikeFilms}
             setIsShowMenu={setIsShowMenu}
             component={Movies}
             isPreloader={isPreloader}
+            filmsLocal={filmsLocal}
           />
 
           <ProtectedRoute
@@ -173,7 +175,7 @@ function App() {
             exact
             isLoggedIn={isLoggedIn}
             handleClickLikeButton={handleClickLikeButton}
-            getLikeFilms={getLikeFilms}
+            requestLikeFilms={requestLikeFilms}
             setIsShowMenu={setIsShowMenu}
             component={SavedMovies}
             isPreloader={isPreloader}
