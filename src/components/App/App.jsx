@@ -18,7 +18,7 @@ import { AppStateContext } from '../../contexts/AppStateContext'
 import MainApi from "../../utils/MainApi";
 import MoviesApi from '../../utils/MoviesApi'
 import { optionsMainApi, optionsMoviesApi } from '../../utils/optionsApi'
-import { PAGES, ALERT__MESSAGES } from '../../utils/constants'
+import { PAGES, ALERT_MESSAGES } from '../../utils/constants'
 import LocalStorage from "../../utils/LocalStorage";
 
 function App() {
@@ -113,7 +113,7 @@ function App() {
         setCurrentUser(user)
       })
       .catch(() => {
-        showAlert(ALERT__MESSAGES.ERROR.GET_USER)
+        showAlert(ALERT_MESSAGES.ERROR.GET_USER)
         throw new Error()
       })
       .finally(() => {
@@ -126,10 +126,10 @@ function App() {
     return mainApi.updateUserInfo(user, token)
       .then(newData => {
         setCurrentUser(newData)
-        showAlert(ALERT__MESSAGES.SUCCESSFULLY.UPDATE_PROFILE)
+        showAlert(ALERT_MESSAGES.SUCCESSFULLY.UPDATE_PROFILE)
       })
       .catch(() => {
-        showAlert(ALERT__MESSAGES.ERROR.UPDATE_PROFILE)
+        showAlert(ALERT_MESSAGES.ERROR.UPDATE_PROFILE)
         throw new Error()
       })
   }
@@ -166,12 +166,12 @@ function App() {
     return filmId
       ? mainApi.deleteLikeFilm(filmId, token)
         .catch(() => {
-          showAlert(ALERT__MESSAGES.ERROR.DELETE_FILM)
+          showAlert(ALERT_MESSAGES.ERROR.DELETE_FILM)
           throw new Error()
         })
       : mainApi.addLikeFilm(film, token)
         .catch(() => {
-          showAlert(ALERT__MESSAGES.ERROR.ADD_FILM)
+          showAlert(ALERT_MESSAGES.ERROR.ADD_FILM)
           throw new Error()
         })
   }

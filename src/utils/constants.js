@@ -13,7 +13,7 @@ const MESSAGES = {
     ERROR: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз'
 }
 
-const ALERT__MESSAGES = {
+const ALERT_MESSAGES = {
     SUCCESSFULLY: {
         UPDATE_PROFILE: 'Данные профиля успешно обновлены!'
     },
@@ -59,4 +59,4 @@ const BASE_URL = 'https://api.nomoreparties.co'
 
 const SHORT_DURATION = 40
 
-export { INPUTS, PATTERNS, MESSAGES, PAGES, BASE_URL, CARD_COUNT, CARD_BRAKEPOINT, SHORT_DURATION, ALERT__MESSAGES }
+export { INPUTS, PATTERNS, MESSAGES, PAGES, BASE_URL, CARD_COUNT, CARD_BRAKEPOINT, SHORT_DURATION, ALERT_MESSAGES }
