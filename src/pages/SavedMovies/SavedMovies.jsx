@@ -1,30 +1,92 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
 import './SavedMovies.css';
+
 import SearchForm from '../../components/SearchForm/SearchForm';
 import MoviesCardList from '../../components/MoviesCardList/MoviesCardList';
+import HeaderAndFooterLayout from '../../layouts/HeaderAndFooterLayout/HeaderAndFooterLayout';
 
-function SavedMovies() {
-  const [isShort, setIsShort] = useState(true)
-  const [searchQuery, setSearchQuery] = useState('')
+import { filterFilms } from '../../utils/filterFilms'
+import { MESSAGES, SHORT_DURATION } from '../../utils/constants'
 
-  const searchFilms = (evt) => {
-    evt.preventDefault()
-    console.log(isShort, searchQuery);
+function SavedMovies({ requestLikeFilms, handleClickLikeButton, setIsShowMenu, searchQuerySavedMoviesLocal }) {
+  const [likedFilms, setLikedFilms] = useState(null)
+  const [displayedFilms, setDisplayedFilms] = useState(null)
+
+  const [errorMessage, setErrorMessage] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    getLikeFilms()
+  }, [])
+
+  function getLikeFilms() {
+    startLoader()
+    requestLikeFilms()
+      .then(films => {
+        setAllFilms(films)
+        hideErrorMessage()
+      })
+      .catch(() => {
+        showErrorMessage(MESSAGES.ERROR)
+      })
+      .finally(() => {
+        stopLoader()
+      })
+  }
+
+  function searchFilms(values) {
+    const films = filterFilms(likedFilms, SHORT_DURATION, values)
+    setDisplayedFilms(films)
+
+    films?.length ? hideErrorMessage() : showErrorMessage(MESSAGES.NOT_FOUND)
+  }
+
+  function handleDeleteFilm(filmId) {
+    handleClickLikeButton(filmId)
+      .then(() => setAllFilms(likedFilms.filter(film => film._id !== filmId)))
+  }
+
+  function setAllFilms(films) {
+    setLikedFilms(films)
+    setDisplayedFilms(films)
+  }
+
+  function startLoader() {
+    setIsLoading(true)
+  }
+
+  function stopLoader() {
+    setIsLoading(false)
+  }
+
+  function showErrorMessage(message) {
+    setErrorMessage(message)
+  }
+
+  function hideErrorMessage() {
+    setErrorMessage(null)
   }
 
   return (
-    <div className="saved">
-      <div className="container movies__container">
-        <SearchForm
-          isShort={isShort}
-          searchQuery={searchQuery}
-          setIsShort={setIsShort}
-          setSearchQuery={setSearchQuery}
-          searchFilms={searchFilms}
-        />
-        <MoviesCardList />
+    <HeaderAndFooterLayout
+      setIsShowMenu={setIsShowMenu}
+    >
+      <div className="saved">
+        <div className="container movies__container">
+          <SearchForm
+            searchFilms={searchFilms}
+            searchQueryLocal={searchQuerySavedMoviesLocal}
+          />
+          <MoviesCardList
+            films={displayedFilms}
+            isLoading={isLoading}
+            message={errorMessage}
+            handleClickLikeButton={handleDeleteFilm}
+          />
+        </div>
       </div>
-    </div>
+    </HeaderAndFooterLayout>
   );
 }
 

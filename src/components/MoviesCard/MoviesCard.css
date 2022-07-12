@@ -5,6 +5,10 @@
     background-color: #222222;
 }
 
+.card-film__trailer-link:hover {
+    opacity: 1;
+}
+
 .card-film__image {
     height: 203px;
 }

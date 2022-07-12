@@ -1,33 +1,47 @@
-import { useState } from "react";
 import './Login.css';
+
 import Label from "../../components/Label/Label";
 import AuthButton from "../../components/AuthButton/AuthButton";
+import ErrorText from "../../components/ErrorText/ErrorText";
+import AuthLayout from '../../layouts/AuthLayout/AuthLayout';
 
-function Login() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+import { useFormWithValidation } from '../../hooks/useFormWithValidation'
+import { VALIDATION_CONFIGS } from '../../utils/constants'
+
+function Login({ handleLogin }) {
+  const { values, errors, isValid, handleChange } = useFormWithValidation({ email: '', password: '' }, VALIDATION_CONFIGS.LOGIN)
 
   function handleSubmitForm(evt) {
     evt.preventDefault()
-    console.log(email, password);
+    handleLogin(values)
   }
 
   return (
-    <form className="form form-login" onSubmit={handleSubmitForm} name='login'>
-      <Label
-        text='E-mail'
-        type='email'
-        value={email}
-        setValue={setEmail}
-      />
-      <Label
-        text='Пароль'
-        type='password'
-        value={password}
-        setValue={setPassword}
-      />
-      <AuthButton />
-    </form>
+    <AuthLayout>
+      <form className="form form-login" onSubmit={handleSubmitForm} name='login'>
+        <Label
+          text='E-mail'
+          type='email'
+          name='email'
+          onInput={handleChange}
+          isValid={!errors.email}
+          value={values.email}
+        />
+        {errors.email && <ErrorText type='auth'>{errors.email}</ErrorText>}
+        <Label
+          text='Пароль'
+          type='password'
+          name='password'
+          onInput={handleChange}
+          isValid={!errors.password}
+          value={values.password}
+        />
+        {errors.password && <ErrorText type='auth'>{errors.password}</ErrorText>}
+        <AuthButton
+          isDisabled={!isValid}
+        />
+      </form>
+    </AuthLayout>
   );
 }
 

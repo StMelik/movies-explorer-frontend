@@ -1,12 +1,13 @@
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+
 import './AuthLayout.css';
+
 import Logo from "../../components/Logo/Logo";
 
-
+import { PAGES } from '../../utils/constants'
 
 function AuthLayout({ children }) {
-    const currentPath = useHistory().location.pathname
-    const isSignIn = currentPath === '/signin'
+    const isSignIn = useHistory().location.pathname === PAGES.SIGNIN
 
     return (
         <>
